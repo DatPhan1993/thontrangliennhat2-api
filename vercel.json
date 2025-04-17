@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server-express.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/server-express.js"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "PORT": "8080",
+    "UPLOAD_DIR": "public/uploads",
+    "IMAGE_DIR": "public/images",
+    "CORS_ORIGIN": "https://thontrangliennhat.com"
+  }
+} 
