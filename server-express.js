@@ -1,9 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs');
+const path = require('path');
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(cors());
@@ -11,6 +12,11 @@ app.use(express.json());
 
 // Serve static files from the public directory
 app.use(express.static('public'));
+
+// Root route to serve HTML instead of JSON
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 // Helper để đọc dữ liệu từ file database.json
 const getDatabase = () => {
