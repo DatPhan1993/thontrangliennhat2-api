@@ -123,30 +123,44 @@
       "children": [
         {
           "id": 51,
-          "title": "CÂU CÁ - BẮT CÁ AO ĐẦM",
-          "slug": "cau-ca-bat-ca",
+          "title": "NÔNG TRẠI VUI VẺ",
+          "slug": "nong-trai-vui-ve",
           "position": 1,
           "children": []
         },
         {
           "id": 52,
-          "title": "CHỢ QUÊ 3 TRONG 1",
-          "slug": "cho-que",
+          "title": "ĐẢO THỔ CAMPING",
+          "slug": "dao-tho-camping",
           "position": 2,
           "children": []
         },
         {
           "id": 53,
-          "title": "MÔ HÌNH SINH KẾ",
-          "slug": "mo-hinh-sinh-ke",
+          "title": "CHÈO THUYỀN",
+          "slug": "cheo-thuyen",
           "position": 3,
           "children": []
         },
         {
           "id": 54,
-          "title": "LÀM THỦ CÔNG MỸ NGHỆ",
-          "slug": "thu-cong-my-nghe",
+          "title": "NUÔI CÁ LỒNG BÈ",
+          "slug": "nuoi-ca-long-be",
           "position": 4,
+          "children": []
+        },
+        {
+          "id": 55,
+          "title": "HỒ THỦY ĐIỆN SÊRÊPÔK 3",
+          "slug": "ho-thuy-dien-serepok-3",
+          "position": 5,
+          "children": []
+        },
+        {
+          "id": 56,
+          "title": "CHÍ PHÈO HOMESTAY",
+          "slug": "chi-pheo-homestay",
+          "position": 6,
           "children": []
         }
       ]
@@ -159,16 +173,23 @@
       "children": [
         {
           "id": 61,
-          "title": "THÔN TRANG LIÊN NHẬT CHUẨN BỊ CHO DỊP LỄ 30/4",
-          "slug": "thon-trang-lien-nhat-chuan-bi-cho-dip-le-30-4",
+          "title": "TIN HỢP TÁC XÃ",
+          "slug": "tin-hop-tac-xa",
           "position": 1,
           "children": []
         },
         {
           "id": 62,
-          "title": "NÔNG NGHIỆP XANH - MÔ HÌNH SINH KẾ 3 TRONG 1",
-          "slug": "nong-nghiep-xanh-mo-hinh-sinh-ke-3-trong-1",
+          "title": "TIN NÔNG NGHIỆP - DU LỊCH",
+          "slug": "tin-nong-nghiep-du-lich",
           "position": 2,
+          "children": []
+        },
+        {
+          "id": 63,
+          "title": "TIN KINH TẾ - XÃ HỘI",
+          "slug": "tin-kinh-te-xa-hoi",
+          "position": 3,
           "children": []
         }
       ]
@@ -325,85 +346,44 @@
   "experiences": [
     {
       "id": 1,
-      "title": "Câu cá - Bắt cá ao đầm",
-      "slug": "cau-ca-bat-ca",
-      "summary": "Trải nghiệm thú vị về câu cá và bắt cá dành cho trẻ em và người lớn",
-      "description": "<p>Du khách có thể tham gia các hoạt động câu cá và bắt cá tại các ao đầm của Thôn Trang Liên Nhật. Đây là hoạt động giải trí thú vị và hấp dẫn giúp du khách, đặc biệt là trẻ em, có cơ hội gần gũi với thiên nhiên và học hỏi về các loài cá nước ngọt.</p>",
-      "images": "/images/experiences/experience1.jpg",
-      "categoryId": 3,
+      "title": "Trải nghiệm làm nông dân một ngày",
+      "slug": "trai-nghiem-lam-nong-dan-mot-ngay",
+      "summary": "Hòa mình vào cuộc sống của người nông dân Tây Nguyên",
+      "description": "<p>Trải nghiệm một ngày làm nông dân tại Buôn Đôn, du khách sẽ được tham gia các hoạt động như trồng trọt, thu hoạch nông sản và chế biến các sản phẩm từ nông sản địa phương.</p>",
+      "images": "https://placehold.co/600x400/png",
+      "categoryId": 1,
       "isFeatured": true,
       "views": 320,
-      "createdAt": "2025-04-01T00:00:00.000Z",
-      "updatedAt": "2025-04-10T00:00:00.000Z"
-    },
-    {
-      "id": 2,
-      "title": "Chợ quê 3 trong 1",
-      "slug": "cho-que",
-      "summary": "Trải nghiệm mua sắm tại chợ quê với đa dạng sản phẩm nông nghiệp sạch",
-      "description": "<p>Chợ quê 3 trong 1 là nơi du khách có thể trải nghiệm không khí mua sắm đặc trưng của vùng quê, nơi quy tụ đa dạng các sản phẩm nông nghiệp sạch do chính người dân địa phương sản xuất. Tại đây, du khách có thể tìm mua các đặc sản địa phương, giao lưu với người dân và tìm hiểu về văn hóa ẩm thực địa phương.</p>",
-      "images": "/images/experiences/experience2.jpg",
-      "categoryId": 4,
-      "isFeatured": true,
-      "views": 280,
-      "createdAt": "2025-04-02T00:00:00.000Z",
-      "updatedAt": "2025-04-12T00:00:00.000Z"
-    },
-    {
-      "id": 3,
-      "title": "Mô hình sinh kế",
-      "slug": "mo-hinh-sinh-ke",
-      "summary": "Tìm hiểu mô hình sinh kế theo quy trình khép kín cho phát triển kinh tế bền vững",
-      "description": "<p>Mô hình sinh kế tại Thôn Trang Liên Nhật là một hệ thống sản xuất khép kín kết hợp nông nghiệp sạch, nuôi trồng thủy sản và phát triển du lịch sinh thái. Du khách sẽ được tham quan và tìm hiểu về cách vận hành của mô hình, cách tận dụng phế phẩm nông nghiệp làm thức ăn cho cá, sử dụng phân cá làm phân bón cho cây trồng, tạo nên một hệ sinh thái bền vững.</p>",
-      "images": "/images/experiences/experience3.jpg",
-      "categoryId": 3,
-      "isFeatured": true,
-      "views": 350,
-      "createdAt": "2025-03-15T00:00:00.000Z",
-      "updatedAt": "2025-04-05T00:00:00.000Z"
-    },
-    {
-      "id": 4,
-      "title": "Làm thủ công mỹ nghệ",
-      "slug": "thu-cong-my-nghe",
-      "summary": "Hoạt động tham quan và thực hành các nghề thủ công truyền thống",
-      "description": "<p>Du khách sẽ được tham quan và trải nghiệm các nghề thủ công truyền thống như đan lát, dệt thổ cẩm, làm đồ lưu niệm từ nguyên liệu tự nhiên. Dưới sự hướng dẫn của các nghệ nhân địa phương, du khách có thể tự tay làm ra các sản phẩm thủ công mỹ nghệ và mang về làm kỷ niệm.</p>",
-      "images": "/images/experiences/experience4.jpg",
-      "categoryId": 4,
-      "isFeatured": true,
-      "views": 290,
-      "createdAt": "2025-03-20T00:00:00.000Z",
-      "updatedAt": "2025-04-08T00:00:00.000Z"
+      "createdAt": "2023-01-05T00:00:00.000Z",
+      "updatedAt": "2023-01-15T00:00:00.000Z"
     }
   ],
   "news": [
     {
       "id": 1,
-      "title": "Thôn Trang Liên Nhật chuẩn bị cho dịp lễ 30/4",
-      "slug": "thon-trang-lien-nhat-chuan-bi-cho-dip-le-30-4",
-      "summary": "Thôn Trang Liên Nhật đang tích cực chuẩn bị các hoạt động phục vụ du khách trong dịp lễ 30/4 ",
-      "content": "<p>Thôn Trang Liên Nhật đang khẩn trương hoàn tất các công tác chuẩn bị để đón tiếp du khách trong dịp lễ 30/4 sắp tới. Các hộ dân trong thôn đã cùng nhau dọn dẹp, trang trí các điểm tham quan, chuẩn bị các món ăn đặc sản địa phương và các hoạt động trải nghiệm văn hóa đặc sắc.</p><p>Dự kiến trong dịp lễ năm nay, Thôn Trang Liên Nhật sẽ tổ chức nhiều hoạt động như: trải nghiệm làm bánh dân tộc, tham quan vườn rau sạch, trải nghiệm bắt cá, câu cá tại ao đầm và các hoạt động văn hóa dân gian đặc sắc khác.</p>",
-      "images": "/images/news/thon-trang-lien-nhat.jpg",
-      "externalUrl": "https://baohatinh.vn/cac-khu-du-lich-sinh-thai-o-ha-tinh-chuan-bi-gi-khi-he-sang-post285932.html?zarsrc=30&utm_source=zalo&utm_medium=zalo&utm_campaign=zalo&fbclid=IwY2xjawJtO51leHRuA2FlbQIxMQABHgMOJtKdBFmnW2rQ67L0ei0YRItSUowC7UhO612fllO4AoI0iLRVAA1E3Xcn_aem_lnwwDTqiMtDZO-Xt0bB6Yg",
+      "title": "HTX Phú Nông Buôn Đôn nhận giải thưởng Sản phẩm nông nghiệp tiêu biểu",
+      "slug": "htx-phu-nong-buon-don-nhan-giai-thuong-san-pham-nong-nghiep-tieu-bieu",
+      "summary": "HTX Phú Nông Buôn Đôn vinh dự nhận giải thưởng Sản phẩm nông nghiệp tiêu biểu năm 2023",
+      "content": "<p>Ngày 10/3/2023, tại Hà Nội, HTX Nông nghiệp - Du lịch Phú Nông Buôn Đôn đã vinh dự nhận giải thưởng Sản phẩm nông nghiệp tiêu biểu năm 2023 do Bộ Nông nghiệp và Phát triển Nông thôn trao tặng.</p><p>Giải thưởng này là sự ghi nhận cho những nỗ lực không ngừng của HTX trong việc phát triển các sản phẩm nông nghiệp sạch, an toàn và chất lượng cao.</p>",
+      "images": "https://placehold.co/600x400/png",
       "categoryId": 5,
       "isFeatured": true,
       "views": 450,
-      "createdAt": "2025-04-16T00:00:00.000Z",
-      "updatedAt": "2025-04-16T00:00:00.000Z"
+      "createdAt": "2023-03-12T00:00:00.000Z",
+      "updatedAt": "2023-03-15T00:00:00.000Z"
     },
     {
       "id": 2,
-      "title": "NÔNG NGHIỆP XANH - MÔ HÌNH SINH KẾ 3 TRONG 1",
-      "slug": "nong-nghiep-xanh-mo-hinh-sinh-ke-3-trong-1",
-      "summary": "Mô hình sinh kế 3 trong 1 đem lại hiệu quả kinh tế cao cho nông dân tại Thôn Trang Liên Nhật",
-      "content": "<p>Mô hình sinh kế 3 trong 1 đang được triển khai tại Thôn Trang Liên Nhật mang lại hiệu quả kinh tế bền vững cho người dân địa phương. Mô hình này kết hợp sản xuất nông nghiệp sạch theo hướng hữu cơ, nuôi trồng thủy sản và phát triển du lịch sinh thái trong cùng một không gian.</p><p>Bằng cách tận dụng tối đa tài nguyên thiên nhiên, áp dụng khoa học kỹ thuật và vòng tuần hoàn sinh thái, mô hình này không chỉ giúp tăng thu nhập cho người dân mà còn góp phần bảo vệ môi trường. Điểm nổi bật của mô hình là tận dụng phế phẩm nông nghiệp làm thức ăn cho cá, sử dụng phân cá làm phân bón cho cây trồng, từ đó tạo nên một hệ sinh thái khép kín và bền vững.</p>",
-      "images": "/images/news/mo-hinh-sinh-ke.jpg",
-      "externalUrl": "https://vtvgo.vn/ts/13331774?fbclid=IwY2xjawJtQg9leHRuA2FlbQIxMQABHlG2EMoqiwbSJuInsmbfTw0mAxpcSdpsEH0U4kHQ6aLXHLwAjrrU3SuEiH-m_aem_xgasrGlcSJWosPZD0NngOA",
+      "title": "Xu hướng du lịch sinh thái và nông nghiệp năm 2023",
+      "slug": "xu-huong-du-lich-sinh-thai-va-nong-nghiep-nam-2023",
+      "summary": "Phân tích các xu hướng du lịch sinh thái và nông nghiệp trong năm 2023",
+      "content": "<p>Năm 2023 chứng kiến sự phát triển mạnh mẽ của du lịch sinh thái và du lịch nông nghiệp tại Việt Nam. Với xu hướng tìm kiếm những trải nghiệm gần gũi với thiên nhiên và mong muốn tìm hiểu về văn hóa bản địa, nhiều du khách đã lựa chọn các tour du lịch sinh thái.</p><p>HTX Nông nghiệp - Du lịch Phú Nông Buôn Đôn đã nắm bắt xu hướng này và phát triển nhiều sản phẩm du lịch phù hợp, mang đến cho du khách những trải nghiệm độc đáo và ý nghĩa.</p>",
+      "images": "https://placehold.co/600x400/png",
       "categoryId": 6,
       "isFeatured": true,
       "views": 380,
-      "createdAt": "2025-04-12T00:00:00.000Z",
-      "updatedAt": "2025-04-12T00:00:00.000Z"
+      "createdAt": "2023-02-20T00:00:00.000Z",
+      "updatedAt": "2023-02-25T00:00:00.000Z"
     }
   ],
   "team": [
