@@ -1,14 +1,44 @@
-# Dependency directories
+# Node.js
 node_modules/
 npm-debug.log
-yarn-error.log
+package-lock.json
 
-# Environment variables
+# Vercel
+.vercel
+
+# Environment vars
 .env
 .env.local
 .env.development.local
 .env.test.local
-.env.development
+.env.production.local
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Backups
+*.bak
+*.bak-*
+*.backup
+
+# IDE
+.idea/
+.vscode/
+
+# Ignore older versions of database
+*.old.json
+*.backup.json
+database.json.bak*
 
 # Debug logs
 logs
