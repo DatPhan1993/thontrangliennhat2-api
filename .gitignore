@@ -54,8 +54,6 @@ pids
 *.pid.lock
 
 # Directory for uploaded files
-/uploads/*
-!/uploads/.gitkeep
 
 # OS files
 .DS_Store
