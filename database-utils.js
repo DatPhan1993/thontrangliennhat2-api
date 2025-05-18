@@ -313,22 +313,64 @@ const readDatabase = () => {
     path.join(__dirname, '..', 'database.json'),
     path.join(__dirname, 'api', 'database.json'),
     '/var/task/database.json',  // Vercel serverless function path
-    '/var/task/api/database.json'  // Alternative Vercel path
+    '/var/task/api/database.json',  // Alternative Vercel path
+    '/tmp/database.json'  // Temporary directory that might be writable in Vercel
   ];
   
+  let foundPath = null;
+  let databaseContent = null;
+  
+  // First try to find the database in any location
   for (const dbPath of possiblePaths) {
     try {
       if (fs.existsSync(dbPath)) {
-        console.log(`Reading database from: ${dbPath}`);
-        const data = fs.readFileSync(dbPath, 'utf8');
-        return JSON.parse(data);
+        console.log(`Found database at: ${dbPath}`);
+        const stats = fs.statSync(dbPath);
+        console.log(`Database size: ${stats.size} bytes`);
+        
+        if (stats.size > 0) {
+          const data = fs.readFileSync(dbPath, 'utf8');
+          try {
+            const parsed = JSON.parse(data);
+            if (parsed && typeof parsed === 'object') {
+              console.log(`Successfully read database from: ${dbPath}`);
+              foundPath = dbPath;
+              databaseContent = parsed;
+              break;
+            }
+          } catch (parseErr) {
+            console.error(`Error parsing database from ${dbPath}:`, parseErr);
+          }
+        } else {
+          console.warn(`Database file at ${dbPath} is empty`);
+        }
       }
     } catch (err) {
       console.error(`Error reading from ${dbPath}:`, err);
     }
   }
   
-  console.error('Database not found in any location');
+  // If database was found, return it
+  if (databaseContent) {
+    return databaseContent;
+  }
+  
+  // If no valid database found, try to use the database.json in the root directory
+  try {
+    console.log('Trying to read database from workspace root');
+    const rootDbPath = path.join(__dirname, '..', 'database.json');
+    
+    if (fs.existsSync(rootDbPath)) {
+      const data = fs.readFileSync(rootDbPath, 'utf8');
+      const parsed = JSON.parse(data);
+      console.log('Successfully read database from workspace root');
+      return parsed;
+    }
+  } catch (err) {
+    console.error('Error reading from workspace root:', err);
+  }
+  
+  console.error('Database not found in any location, returning empty database');
   return { products: [], services: [], experiences: [], news: [] };
 };
 

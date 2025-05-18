@@ -53,7 +53,10 @@ const destinations = [
   path.join(__dirname, 'api', 'database.json'),
   path.join(__dirname, 'public', 'database.json'),
   path.join(__dirname, 'api', 'products', 'database.json'),
-  path.join(__dirname, 'api', 'services', 'database.json')
+  path.join(__dirname, 'api', 'services', 'database.json'),
+  path.join(__dirname, 'api', 'experiences', 'database.json'),
+  path.join(__dirname, 'api', 'news', 'database.json'),
+  '/tmp/database.json'  // Vercel's writable temp directory
 ];
 
 // Copy database to all destinations if it exists

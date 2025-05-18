@@ -61,6 +61,35 @@ module.exports = (req, res) => {
     console.log(`Found ${products.length} products in database`);
     
     // Return products with debug info
+    // Check if products array is empty
+    if (!products || products.length === 0) {
+      console.warn('Products array is empty or null');
+      
+      // Create a fallback product if none exist
+      const fallbackProducts = [
+        {
+          id: 999,
+          name: 'Sản phẩm mẫu',
+          description: 'Đây là sản phẩm mẫu được tạo ra vì không tìm thấy sản phẩm nào trong cơ sở dữ liệu',
+          images: ['/images/placeholder.jpg'],
+          price: 100000,
+          createdAt: new Date().toISOString()
+        }
+      ];
+      
+      return res.status(200).json({
+        statusCode: 200,
+        message: 'Warning: No products found in database. Returning fallback data.',
+        data: fallbackProducts,
+        isFallback: true,
+        debug: {
+          timestamp: new Date().toISOString(),
+          dbLocations: debugInfo,
+          env: process.env.NODE_ENV
+        }
+      });
+    }
+    
     return res.status(200).json({
       statusCode: 200,
       message: 'Success',
