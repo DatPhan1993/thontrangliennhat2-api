@@ -310,7 +310,10 @@ function syncFromNewest() {
 const readDatabase = () => {
   const possiblePaths = [
     path.join(__dirname, 'database.json'),
-    path.join(__dirname, '..', 'database.json')
+    path.join(__dirname, '..', 'database.json'),
+    path.join(__dirname, 'api', 'database.json'),
+    '/var/task/database.json',  // Vercel serverless function path
+    '/var/task/api/database.json'  // Alternative Vercel path
   ];
   
   for (const dbPath of possiblePaths) {
