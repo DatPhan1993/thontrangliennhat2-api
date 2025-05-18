@@ -1,46 +1,81 @@
+/**
+ * API endpoint to serve the database file directly
+ */
 const fs = require('fs');
 const path = require('path');
 
 module.exports = (req, res) => {
+  console.log('Database API endpoint accessed');
+  
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   
-  // Handle OPTIONS preflight requests
+  // Handle preflight requests
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
   
-  try {
-    // Try to find database.json in various locations
-    const dbPaths = [
-      path.join(__dirname, '..', 'database.json'),
-      path.join(__dirname, '..', '..', 'database.json')
-    ];
-    
-    let dbContent = null;
-    
-    for (const dbPath of dbPaths) {
-      if (fs.existsSync(dbPath)) {
-        dbContent = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
-        break;
-      }
-    }
-    
-    if (dbContent) {
-      // Add cache busting header
-      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-      res.setHeader('Pragma', 'no-cache');
-      res.setHeader('Expires', '0');
-      
-      // Return the database content
-      return res.json(dbContent);
-    } else {
-      return res.status(404).json({ error: 'Database not found' });
-    }
-  } catch (error) {
-    console.error('Error serving database:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+  // Only allow GET method
+  if (req.method !== 'GET') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
+  
+  // Possible database locations
+  const possiblePaths = [
+    path.join(__dirname, '../database.json'),
+    path.join(__dirname, 'database.json'),
+    '/var/task/database.json',
+    '/var/task/api/database.json'
+  ];
+  
+  // Check each possible path
+  for (const dbPath of possiblePaths) {
+    try {
+      if (fs.existsSync(dbPath)) {
+        console.log(`Found database at: ${dbPath}`);
+        const data = fs.readFileSync(dbPath, 'utf8');
+        
+        try {
+          // Try to parse the data as JSON to validate it
+          const parsedData = JSON.parse(data);
+          
+          // Set content type and serve the database
+          res.setHeader('Content-Type', 'application/json');
+          return res.status(200).send(data);
+        } catch (parseError) {
+          console.error(`Error parsing database JSON: ${parseError.message}`);
+        }
+      }
+    } catch (err) {
+      console.error(`Error checking database at ${dbPath}: ${err.message}`);
+    }
+  }
+  
+  // If we get here, we couldn't find a valid database file
+  // Create a minimal database to return
+  const fallbackDb = {
+    products: [
+      {
+        id: 999,
+        name: 'Fallback Product',
+        description: 'This is a fallback product created because the database file could not be found',
+        createdAt: new Date().toISOString()
+      }
+    ],
+    services: [
+      {
+        id: 999,
+        name: 'Fallback Service',
+        description: 'This is a fallback service created because the database file could not be found',
+        createdAt: new Date().toISOString()
+      }
+    ],
+    fallback: true,
+    error: 'Could not find database file'
+  };
+  
+  res.setHeader('Content-Type', 'application/json');
+  return res.status(200).json(fallbackDb);
 }; 
