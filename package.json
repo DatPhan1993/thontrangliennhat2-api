@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "API server for Thôn Trang Liên Nhật website",
   "engines": {
-    "node": "22.x"
+    "node": "18.x"
   },
   "scripts": {
     "start": "node server-express.js",
