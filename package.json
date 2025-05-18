@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "node server-express.js",
-    "build": "echo 'No build step required'"
+    "build": "node copy-db.js"
   },
   "keywords": [
     "api",

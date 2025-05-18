@@ -5,7 +5,7 @@
       "src": "/api/(.*)",
       "dest": "/api/$1",
       "headers": {
-        "Access-Control-Allow-Origin": "https://thontrangliennhat.com",
+        "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type, Authorization"
       }
@@ -15,6 +15,22 @@
     { "src": "/api/experiences/(.*)", "dest": "/api/experiences/$1" },
     { "src": "/api/news/(.*)", "dest": "/api/news/$1" },
     { "src": "/api/upload", "dest": "/api/upload.js" },
+    { "src": "/database.json", "dest": "/api/database.js" },
+    { "src": "/thontrangliennhat-api/database.json", "dest": "/api/database.js" },
+    { 
+      "src": "/images/(.*)", 
+      "dest": "/images/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=86400"
+      }
+    },
+    { 
+      "src": "/uploads/(.*)", 
+      "dest": "/uploads/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=86400"
+      }
+    },
     { "handle": "filesystem" }
   ],
   "functions": {

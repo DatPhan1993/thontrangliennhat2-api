@@ -305,21 +305,61 @@ function syncFromNewest() {
 }
 
 /**
- * Reads the database from any available source
- * @returns {Object} Database object
+ * Reads the database from various possible locations
  */
-function readDatabase() {
-  return getNewestDatabase() || { 
-    users: [], 
-    products: [], 
-    services: [], 
-    experiences: [], 
-    news: [], 
-    videos: [], 
-    images: [], 
-    testimonials: [] 
-  };
-}
+const readDatabase = () => {
+  const possiblePaths = [
+    path.join(__dirname, 'database.json'),
+    path.join(__dirname, '..', 'database.json')
+  ];
+  
+  for (const dbPath of possiblePaths) {
+    try {
+      if (fs.existsSync(dbPath)) {
+        console.log(`Reading database from: ${dbPath}`);
+        const data = fs.readFileSync(dbPath, 'utf8');
+        return JSON.parse(data);
+      }
+    } catch (err) {
+      console.error(`Error reading from ${dbPath}:`, err);
+    }
+  }
+  
+  console.error('Database not found in any location');
+  return { products: [], services: [], experiences: [], news: [] };
+};
+
+/**
+ * Writes the database to the file
+ */
+const writeDatabase = (data) => {
+  try {
+    const dbPath = path.join(__dirname, 'database.json');
+    const backupPath = path.join(__dirname, 'database.json.backup');
+    
+    // First backup existing database
+    if (fs.existsSync(dbPath)) {
+      fs.copyFileSync(dbPath, backupPath);
+      console.log(`Backed up database to: ${backupPath}`);
+    }
+    
+    // Then write the new data
+    console.log(`Writing database to: ${dbPath}`);
+    fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
+    
+    // Also write to parent directory if it exists
+    const parentPath = path.join(__dirname, '..', 'database.json');
+    if (fs.existsSync(parentPath)) {
+      console.log(`Also writing to parent path: ${parentPath}`);
+      fs.writeFileSync(parentPath, JSON.stringify(data, null, 2));
+    }
+    
+    return true;
+  } catch (err) {
+    console.error('Error writing database:', err);
+    return false;
+  }
+};
 
 // Export utility functions
 module.exports = {
@@ -330,5 +370,6 @@ module.exports = {
   addProduct,
   verifyProduct,
   syncFromNewest,
-  readDatabase
+  readDatabase,
+  writeDatabase
 }; 
