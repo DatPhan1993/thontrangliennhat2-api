@@ -1,34 +1,40 @@
 {
   "name": "thontrangliennhat-api",
   "version": "1.0.0",
-  "description": "API server for Thôn Trang Liên Nhật website",
-  "engines": {
-    "node": "18.x"
-  },
+  "description": "API for Thôn Trang Liên Nhật",
+  "main": "api/index.js",
   "scripts": {
     "start": "node server-express.js",
-    "dev": "nodemon server-express.js",
-    "build": "node copy-db.js && node copy-images.js",
+    "dev": "vercel dev",
+    "build": "node ./scripts/prepare-build.js && node copy-db.js && node copy-images.js",
     "vercel-build": "node copy-db.js && node copy-images.js",
-    "test": "echo \"No tests specified\" && exit 0",
-    "lint": "echo \"No linting specified\" && exit 0"
+    "deploy": "vercel --prod",
+    "lint": "eslint .",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "engines": {
+    "node": ">=14.x"
   },
   "keywords": [
     "api",
-    "nodejs",
-    "express",
+    "vercel",
     "serverless"
   ],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vercel/node": "^2.15.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "multer": "^1.4.5-lts.2",
     "slugify": "^1.6.6",
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "fs-extra": "^11.1.1",
+    "glob": "^8.1.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "eslint": "^8.44.0",
+    "nodemon": "^2.0.22",
+    "vercel": "^31.0.1"
   }
 } 

@@ -1,41 +1,79 @@
 # Thôn Trang Liên Nhật API
 
-API server cho website Thôn Trang Liên Nhật, được triển khai trên Vercel Serverless Functions.
+A simple serverless API for Thôn Trang Liên Nhật website.
 
-## Tổng quan
+## Features
 
-API này cung cấp các endpoint để truy xuất và quản lý:
-- Sản phẩm (Products)
-- Dịch vụ (Services)
-- Trải nghiệm (Experiences)
-- Tin tức (News)
-- Upload hình ảnh
+- Serverless API deployed to Vercel
+- Simple JSON database
+- Endpoints for products, services, experiences, and news
 
-## Công nghệ sử dụng
+## Development
 
-- Node.js 18.x
-- Vercel Serverless Functions
-- Database: JSON file (database.json)
-
-## Cấu trúc project
-
+1. Install dependencies:
+```bash
+npm install
 ```
-/
-├── api/                  # Thư mục chứa Serverless Functions
-│   ├── products/         # Endpoint cho sản phẩm
-│   ├── services/         # Endpoint cho dịch vụ
-│   ├── experiences/      # Endpoint cho trải nghiệm
-│   ├── news/             # Endpoint cho tin tức
-│   └── upload.js         # Endpoint xử lý upload file
-├── database-utils.js     # Utilities cho việc đọc/ghi database
-├── database.json         # File lưu trữ dữ liệu
-└── vercel.json           # Cấu hình cho Vercel
+
+2. Run development server:
+```bash
+npm run dev
 ```
+
+## Deployment
+
+### Deploy to Vercel
+
+1. Install Vercel CLI globally (if not already installed):
+```bash
+npm install -g vercel
+```
+
+2. Login to Vercel (if not already logged in):
+```bash
+vercel login
+```
+
+3. Deploy to production:
+```bash
+npm run deploy
+```
+
+Or deploy directly with Vercel CLI:
+```bash
+vercel --prod
+```
+
+### Environment Setup in Vercel Dashboard
+
+In the Vercel dashboard under project settings > Build & Development Settings:
+
+1. Build Command: Leave empty (uses package.json build script)
+2. Output Directory: Leave empty
+3. Install Command: `npm install`
+4. Development Command: `npm run dev`
 
 ## API Endpoints
 
-- **Products**: `/api/products` và `/api/products/[id]`
-- **Services**: `/api/services` và `/api/services/[id]`
-- **Experiences**: `/api/experiences` và `/api/experiences/[id]`
-- **News**: `/api/news` và `/api/news/[id]`
-- **Upload**: `/api/upload` (POST) 
+- `GET /` - API information
+- `GET /products` - List all products
+- `GET /services` - List all services
+- `GET /experiences` - List all experiences
+- `GET /news` - List all news
+- `GET /database.json` - Get entire database
+
+## Database Structure
+
+The database is stored in `database.json` at the root of the project with the following structure:
+
+```json
+{
+  "products": [],
+  "services": [],
+  "experiences": [],
+  "news": [],
+  "syncInfo": {
+    "lastSync": "2023-05-19T10:34:00Z"
+  }
+}
+``` 

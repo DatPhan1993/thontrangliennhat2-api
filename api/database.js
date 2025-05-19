@@ -1,46 +1,71 @@
-const fs = require('fs');
-const path = require('path');
+/**
+ * API endpoint to serve the database file directly
+ */
+const { readDatabase } = require('../database-utils');
 
 module.exports = (req, res) => {
-  // Set CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  // Set CORS headers for requests based on origin
+  const allowedOrigins = [
+    'https://thontrangliennhat.com',
+    'http://thontrangliennhat.com',
+    'http://localhost:3000',
+    'http://localhost:3001'
+  ];
   
-  // Handle OPTIONS preflight requests
+  const origin = req.headers.origin;
+  
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  } else {
+    res.setHeader('Access-Control-Allow-Origin', 'https://thontrangliennhat.com');
+  }
+  
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization, Cache-Control, Pragma, Expires, X-Cache-Control, X-Timestamp, X-Nocache');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Max-Age', '86400');
+  res.setHeader('Vary', 'Origin');
+  
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  // Set CORS headers for all requests
+  res.setHeader('Access-Control-Allow-Origin', 'https://thontrangliennhat.com');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Vary', 'Origin');
+  
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  console.log('Database API endpoint accessed');
+  
+  // Set comprehensive CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization, Cache-Control, Pragma, Expires, X-Cache-Control, X-Timestamp, X-Nocache');
+  res.setHeader('Access-Control-Max-Age', '86400');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  
+  // Handle preflight requests
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
   
-  try {
-    // Try to find database.json in various locations
-    const dbPaths = [
-      path.join(__dirname, '..', 'database.json'),
-      path.join(__dirname, '..', '..', 'database.json')
-    ];
-    
-    let dbContent = null;
-    
-    for (const dbPath of dbPaths) {
-      if (fs.existsSync(dbPath)) {
-        dbContent = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
-        break;
-      }
-    }
-    
-    if (dbContent) {
-      // Add cache busting header
-      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-      res.setHeader('Pragma', 'no-cache');
-      res.setHeader('Expires', '0');
-      
-      // Return the database content
-      return res.json(dbContent);
-    } else {
-      return res.status(404).json({ error: 'Database not found' });
-    }
-  } catch (error) {
-    console.error('Error serving database:', error);
-    return res.status(500).json({ error: 'Internal server error' });
+  // Only allow GET method
+  if (req.method !== 'GET') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
+  
+  // Get database content using utility function
+  const database = readDatabase();
+  
+  // Set content type and serve the database
+  res.setHeader('Content-Type', 'application/json');
+  return res.status(200).json(database);
 }; 

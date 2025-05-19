@@ -43,7 +43,13 @@ const upload = multer({
 });
 
 // Middleware
-app.use(cors());
+// Configure CORS to allow requests from thontrangliennhat.com
+app.use(cors({
+  origin: 'https://thontrangliennhat.com',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['X-Requested-With', 'Content-Type', 'Accept', 'Origin', 'Authorization']
+}));
 app.use(express.json());
 
 // Logging middleware
@@ -108,9 +114,10 @@ app.use((req, res, next) => {
       console.log(`Special handling for known problematic image: ${req.path}`);
       
       // Set appropriate headers
-      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Origin', 'https://thontrangliennhat.com');
       res.setHeader('Cache-Control', 'public, max-age=86400');
       res.setHeader('Content-Type', 'image/jpeg');
+      res.setHeader('Vary', 'Origin');
       
       // Check multiple possible locations
       const filename = path.basename(req.path);
@@ -195,9 +202,11 @@ app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
 
 // Access control headers
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'https://thontrangliennhat.com');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Vary', 'Origin');
   
   // Add cache control headers to prevent caching of images
   if (req.path.match(/\.(jpg|jpeg|png|gif|svg|webp)$/i)) {

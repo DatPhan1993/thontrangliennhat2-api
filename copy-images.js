@@ -66,4 +66,4 @@ if (fs.existsSync(sourceUploadDir)) {
   console.warn(`Source upload directory not found: ${sourceUploadDir}`);
 }
 
-console.log('Image copy process completed.'); 
+console.log('Image copy process completed.');

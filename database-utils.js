@@ -308,25 +308,113 @@ function syncFromNewest() {
  * Reads the database from various possible locations
  */
 const readDatabase = () => {
+  console.log('VERBOSE LOGGING: readDatabase() called');
   const possiblePaths = [
     path.join(__dirname, 'database.json'),
-    path.join(__dirname, '..', 'database.json')
+    path.join(__dirname, '..', 'database.json'),
+    path.join(__dirname, 'api', 'database.json'),
+    '/var/task/database.json',  // Vercel serverless function path
+    '/var/task/api/database.json',  // Alternative Vercel path
+    '/tmp/database.json'  // Temporary directory that might be writable in Vercel
   ];
   
+  console.log('VERBOSE LOGGING: Checking the following possible database paths:');
+  possiblePaths.forEach(p => console.log(`  - ${p}`));
+  
+  let foundPath = null;
+  let databaseContent = null;
+  
+  // First try to find the database in any location
   for (const dbPath of possiblePaths) {
     try {
+      console.log(`VERBOSE LOGGING: Checking if database exists at: ${dbPath}`);
       if (fs.existsSync(dbPath)) {
-        console.log(`Reading database from: ${dbPath}`);
+        console.log(`Found database at: ${dbPath}`);
+        const stats = fs.statSync(dbPath);
+        console.log(`Database size: ${stats.size} bytes`);
+        
+        if (stats.size > 0) {
+          console.log(`VERBOSE LOGGING: Reading database file content from: ${dbPath}`);
         const data = fs.readFileSync(dbPath, 'utf8');
-        return JSON.parse(data);
+          try {
+            console.log(`VERBOSE LOGGING: Parsing database file content from: ${dbPath}`);
+            const parsed = JSON.parse(data);
+            if (parsed && typeof parsed === 'object') {
+              console.log(`Successfully read database from: ${dbPath}`);
+              
+              // Log database structure
+              console.log(`VERBOSE LOGGING: Database structure overview:`);
+              if (parsed.products) console.log(`  - products: ${Array.isArray(parsed.products) ? parsed.products.length : 'not an array'} items`);
+              if (parsed.services) console.log(`  - services: ${Array.isArray(parsed.services) ? parsed.services.length : 'not an array'} items`);
+              if (parsed.experiences) console.log(`  - experiences: ${Array.isArray(parsed.experiences) ? parsed.experiences.length : 'not an array'} items`);
+              if (parsed.news) console.log(`  - news: ${Array.isArray(parsed.news) ? parsed.news.length : 'not an array'} items`);
+              
+              foundPath = dbPath;
+              databaseContent = parsed;
+              break;
+            } else {
+              console.error(`VERBOSE LOGGING: Invalid database structure at ${dbPath}`);
+            }
+          } catch (parseErr) {
+            console.error(`Error parsing database from ${dbPath}:`, parseErr);
+            console.log(`VERBOSE LOGGING: First 100 characters of file: ${data.substring(0, 100)}`);
+          }
+        } else {
+          console.warn(`Database file at ${dbPath} is empty`);
+        }
+      } else {
+        console.log(`VERBOSE LOGGING: Database file does not exist at: ${dbPath}`);
       }
     } catch (err) {
       console.error(`Error reading from ${dbPath}:`, err);
     }
   }
   
-  console.error('Database not found in any location');
-  return { products: [], services: [], experiences: [], news: [] };
+  // If database was found, return it
+  if (databaseContent) {
+    return databaseContent;
+  }
+  
+  // If no valid database found, try to use the database.json in the root directory
+  try {
+    console.log('Trying to read database from workspace root');
+    const rootDbPath = path.join(__dirname, '..', 'database.json');
+    
+    if (fs.existsSync(rootDbPath)) {
+      const data = fs.readFileSync(rootDbPath, 'utf8');
+      const parsed = JSON.parse(data);
+      console.log('Successfully read database from workspace root');
+      return parsed;
+    }
+  } catch (err) {
+    console.error('Error reading from workspace root:', err);
+  }
+  
+  console.error('Database not found in any location, returning empty database');
+  // Return an empty database with fallback data
+  return { 
+    products: [
+      {
+        id: 999,
+        name: 'Sản phẩm mẫu (fallback)',
+        description: 'Đây là sản phẩm mẫu được tạo ra vì không tìm thấy cơ sở dữ liệu',
+        price: 100000,
+        images: ['/images/placeholder.jpg'],
+        createdAt: new Date().toISOString()
+      }
+    ], 
+    services: [
+      {
+        id: 999,
+        name: 'Dịch vụ mẫu (fallback)',
+        description: 'Đây là dịch vụ mẫu được tạo ra vì không tìm thấy cơ sở dữ liệu',
+        images: ['/images/placeholder.jpg'],
+        createdAt: new Date().toISOString()
+      }
+    ], 
+    experiences: [], 
+    news: [] 
+  };
 };
 
 /**
