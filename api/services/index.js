@@ -1,4 +1,5 @@
 // Services API endpoint
+const { readDatabase } = require('../../database-utils');
 const fs = require('fs');
 const path = require('path');
 
@@ -19,32 +20,9 @@ module.exports = (req, res) => {
     return res.status(405).json({ error: 'Method not allowed' });
   }
   
-  // Possible database locations
-  const possiblePaths = [
-    path.join(__dirname, '../../database.json'),
-    path.join(__dirname, '../database.json'),
-    path.join(__dirname, 'database.json'),
-    path.join(process.cwd(), 'database.json'),
-    path.join(process.cwd(), 'api/database.json')
-  ];
-  
-  // Try to find and read the database
-  let services = [];
-  for (const dbPath of possiblePaths) {
-    try {
-      if (fs.existsSync(dbPath)) {
-        console.log(`Found database at: ${dbPath}`);
-        const data = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
-        
-        if (data && data.services) {
-          services = data.services;
-          break;
-        }
-      }
-    } catch (err) {
-      console.error(`Error reading database at ${dbPath}: ${err.message}`);
-    }
-  }
+  // Use the database utility to get the services
+  const database = readDatabase();
+  const services = database.services || [];
   
   // Return services data
   res.setHeader('Content-Type', 'application/json');

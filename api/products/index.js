@@ -21,32 +21,9 @@ module.exports = (req, res) => {
     return res.status(405).json({ error: 'Method not allowed' });
   }
   
-  // Possible database locations
-  const possiblePaths = [
-    path.join(__dirname, '../../database.json'),
-    path.join(__dirname, '../database.json'),
-    path.join(__dirname, 'database.json'),
-    path.join(process.cwd(), 'database.json'),
-    path.join(process.cwd(), 'api/database.json')
-  ];
-  
-  // Try to find and read the database
-  let products = [];
-  for (const dbPath of possiblePaths) {
-    try {
-      if (fs.existsSync(dbPath)) {
-        console.log(`Found database at: ${dbPath}`);
-        const data = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
-        
-        if (data && data.products) {
-          products = data.products;
-          break;
-        }
-      }
-    } catch (err) {
-      console.error(`Error reading database at ${dbPath}: ${err.message}`);
-    }
-  }
+  // Use the database utility to get the products
+  const database = readDatabase();
+  const products = database.products || [];
   
   // Return products data
   res.setHeader('Content-Type', 'application/json');

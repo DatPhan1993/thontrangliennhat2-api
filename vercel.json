@@ -4,7 +4,6 @@
   "builds": [
     { "src": "api/**/*.js", "use": "@vercel/node" }
   ],
-  "buildCommand": "./vercel-build.sh",
   "headers": [
     {
       "source": "/(.*)",

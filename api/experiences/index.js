@@ -1,4 +1,5 @@
 // Experiences API endpoint
+const { readDatabase } = require('../../database-utils');
 const fs = require('fs');
 const path = require('path');
 
@@ -19,32 +20,9 @@ module.exports = (req, res) => {
     return res.status(405).json({ error: 'Method not allowed' });
   }
   
-  // Possible database locations
-  const possiblePaths = [
-    path.join(__dirname, '../../database.json'),
-    path.join(__dirname, '../database.json'),
-    path.join(__dirname, 'database.json'),
-    path.join(process.cwd(), 'database.json'),
-    path.join(process.cwd(), 'api/database.json')
-  ];
-  
-  // Try to find and read the database
-  let experiences = [];
-  for (const dbPath of possiblePaths) {
-    try {
-      if (fs.existsSync(dbPath)) {
-        console.log(`Found database at: ${dbPath}`);
-        const data = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
-        
-        if (data && data.experiences) {
-          experiences = data.experiences;
-          break;
-        }
-      }
-    } catch (err) {
-      console.error(`Error reading database at ${dbPath}: ${err.message}`);
-    }
-  }
+  // Use the database utility to get the experiences
+  const database = readDatabase();
+  const experiences = database.experiences || [];
   
   // Return experiences data
   res.setHeader('Content-Type', 'application/json');
