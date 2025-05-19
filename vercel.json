@@ -1,1 +1,1 @@
-{ "version": 2, "public": true, "builds": [ { "src": "api/**/*.js", "use": "@vercel/node" } ], "rewrites": [ { "source": "/(.*)", "destination": "/api/$1" } ] }
+{ "version": 2, "public": true, "builds": [ { "src": "thontrangliennhat-api/**/*.js", "use": "@vercel/node" } ], "rewrites": [ { "source": "/(.*)", "destination": "/thontrangliennhat-api/$1" } ] }
