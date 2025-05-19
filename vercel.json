@@ -1,1 +1,55 @@
-{ "version": 2, "public": true, "builds": [ { "src": "thontrangliennhat-api/**/*.js", "use": "@vercel/node" } ], "rewrites": [ { "source": "/(.*)", "destination": "/thontrangliennhat-api/$1" } ] }
+{
+  "version": 2,
+  "public": true,
+  "builds": [
+    { "src": "api/**/*.js", "use": "@vercel/node" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,POST,PUT,DELETE,OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "X-Requested-With,Content-Type,Accept,Origin,Authorization,Cache-Control,Pragma,Expires,X-Cache-Control,X-Timestamp,X-Nocache" },
+        { "key": "Access-Control-Max-Age", "value": "86400" },
+        { "key": "Access-Control-Allow-Credentials", "value": "true" }
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/api/$1",
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept, Origin, Authorization, Cache-Control, Pragma, Expires, X-Cache-Control, X-Timestamp, X-Nocache",
+        "Access-Control-Allow-Credentials": "true"
+      }
+    },
+    { "src": "/products/(.*)", "dest": "/api/products/$1" },
+    { "src": "/services/(.*)", "dest": "/api/services/$1" },
+    { "src": "/experiences/(.*)", "dest": "/api/experiences/$1" },
+    { "src": "/news/(.*)", "dest": "/api/news/$1" },
+    { "src": "/upload", "dest": "/api/upload.js" },
+    { "src": "/database.json", "dest": "/api/database.js" },
+    { "src": "/thontrangliennhat-api/database.json", "dest": "/api/database.js" },
+    { 
+      "src": "/images/(.*)", 
+      "dest": "/images/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=86400",
+        "Access-Control-Allow-Origin": "*"
+      }
+    },
+    { 
+      "src": "/uploads/(.*)", 
+      "dest": "/uploads/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=86400",
+        "Access-Control-Allow-Origin": "*"
+      }
+    },
+    { "handle": "filesystem" }
+  ]
+}
