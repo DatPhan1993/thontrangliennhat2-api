@@ -10,8 +10,9 @@
       "headers": [
         { "key": "Access-Control-Allow-Origin", "value": "*" },
         { "key": "Access-Control-Allow-Methods", "value": "GET,POST,PUT,DELETE,OPTIONS" },
-        { "key": "Access-Control-Allow-Headers", "value": "X-Requested-With,Content-Type,Accept,Origin,Authorization,cache-control,pragma,expires" },
-        { "key": "Access-Control-Max-Age", "value": "86400" }
+        { "key": "Access-Control-Allow-Headers", "value": "X-Requested-With,Content-Type,Accept,Origin,Authorization,Cache-Control,Pragma,Expires,X-Cache-Control,X-Timestamp,X-Nocache" },
+        { "key": "Access-Control-Max-Age", "value": "86400" },
+        { "key": "Access-Control-Allow-Credentials", "value": "true" }
       ]
     }
   ],
@@ -22,7 +23,8 @@
       "headers": {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization, cache-control, pragma, expires, X-Requested-With, Accept, Origin"
+        "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept, Origin, Authorization, Cache-Control, Pragma, Expires, X-Cache-Control, X-Timestamp, X-Nocache",
+        "Access-Control-Allow-Credentials": "true"
       }
     },
     { "src": "/products/(.*)", "dest": "/api/products/$1" },
@@ -36,14 +38,16 @@
       "src": "/images/(.*)", 
       "dest": "/images/$1",
       "headers": {
-        "Cache-Control": "public, max-age=86400"
+        "Cache-Control": "public, max-age=86400",
+        "Access-Control-Allow-Origin": "*"
       }
     },
     { 
       "src": "/uploads/(.*)", 
       "dest": "/uploads/$1",
       "headers": {
-        "Cache-Control": "public, max-age=86400"
+        "Cache-Control": "public, max-age=86400",
+        "Access-Control-Allow-Origin": "*"
       }
     },
     { "handle": "filesystem" }
