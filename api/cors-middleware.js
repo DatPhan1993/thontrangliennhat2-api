@@ -7,7 +7,10 @@ module.exports = function corsMiddleware(req, res, next) {
   // Define allowed origins
   const allowedOrigins = [
     'https://thontrangliennhat.com',
+    'https://www.thontrangliennhat.com',
     'http://thontrangliennhat.com',
+    'http://www.thontrangliennhat.com',
+    'https://thontrangliennhat2-frontend.vercel.app',
     'http://localhost:3000',
     'http://localhost:3001'
   ];
@@ -16,11 +19,11 @@ module.exports = function corsMiddleware(req, res, next) {
   const origin = req.headers.origin;
   
   // Set CORS headers based on the origin
-  if (allowedOrigins.includes(origin)) {
+  if (origin && allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
   } else {
-    // For requests without origin header or from non-allowed origins
-    res.setHeader('Access-Control-Allow-Origin', 'https://thontrangliennhat.com');
+    // Allow any origin as a fallback
+    res.setHeader('Access-Control-Allow-Origin', '*');
   }
   
   // Set standard CORS headers for all requests

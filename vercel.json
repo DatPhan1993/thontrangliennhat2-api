@@ -15,6 +15,7 @@
     { "source": "/teams/:path*", "destination": "/api/teams.js" },
     { "source": "/options/(.*)", "destination": "/api/options-handler.js" },
     { "source": "/upload", "destination": "/api/upload.js" },
+    { "source": "/cors-check", "destination": "/api/cors-fix.js" },
     { "source": "/database.json", "destination": "/api/database.js" },
     { "source": "/thontrangliennhat-api/database.json", "destination": "/api/database.js" },
     { "source": "/(.*)", "destination": "/api/index.js" }
