@@ -610,8 +610,6 @@
   "syncInfo": {
     "lastSync": "2025-05-15T06:41:03.381Z"
   },
-  "comments": {
-    "description": "This is a comment field that can be safely ignored",
-    "lastSync": "2025-05-17T08:33:05.154Z"
-  }
+  "_comment": "This is a comment field that can be safely ignored",
+  "_lastSync": "2025-05-17T08:33:05.154Z"
 }

@@ -1,0 +1,32 @@
+[
+  {
+    "endpoint": "/",
+    "success": false,
+    "error": "connect EHOSTUNREACH 216.198.79.193:443"
+  },
+  {
+    "endpoint": "/products",
+    "success": false,
+    "error": "connect EHOSTUNREACH 216.198.79.193:443"
+  },
+  {
+    "endpoint": "/services",
+    "success": false,
+    "error": "connect EHOSTUNREACH 216.198.79.193:443"
+  },
+  {
+    "endpoint": "/experiences",
+    "success": false,
+    "error": "connect EHOSTUNREACH 216.198.79.193:443"
+  },
+  {
+    "endpoint": "/news",
+    "success": false,
+    "error": "connect EHOSTUNREACH 216.198.79.193:443"
+  },
+  {
+    "endpoint": "/database.json",
+    "success": false,
+    "error": "connect EHOSTUNREACH 216.198.79.193:443"
+  }
+]

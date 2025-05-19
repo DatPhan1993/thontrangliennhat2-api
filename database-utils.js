@@ -335,7 +335,7 @@ const readDatabase = () => {
         
         if (stats.size > 0) {
           console.log(`VERBOSE LOGGING: Reading database file content from: ${dbPath}`);
-          const data = fs.readFileSync(dbPath, 'utf8');
+        const data = fs.readFileSync(dbPath, 'utf8');
           try {
             console.log(`VERBOSE LOGGING: Parsing database file content from: ${dbPath}`);
             const parsed = JSON.parse(data);
