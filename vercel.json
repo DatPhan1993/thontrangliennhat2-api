@@ -1,52 +1,51 @@
 {
-    "version": 2,
-    "public": true,
-    "builds": [
-      { "src": "api/**/*.js", "use": "@vercel/node" }
-    ],
-    "rewrites": [
-      { "source": "/products/:path*", "destination": "/api/content.js" },
-      { "source": "/services/:path*", "destination": "/api/content.js" },
-      { "source": "/experiences/:path*", "destination": "/api/content.js" },
-      { "source": "/news/:path*", "destination": "/api/content.js" },
-      { "source": "/parent-navs/:path*", "destination": "/api/navigation.js" },
-      { "source": "/child-navs/:path*", "destination": "/api/navigation.js" },
-      { "source": "/navigation-links", "destination": "/api/navigation.js" },
-      { "source": "/teams/:path*", "destination": "/api/teams.js" },
-      { "source": "/options/(.*)", "destination": "/api/options-handler.js" },
-      { "source": "/upload", "destination": "/api/upload.js" },
-      { "source": "/database.json", "destination": "/api/database.js" },
-      { "source": "/thontrangliennhat-api/database.json", "destination": "/api/database.js" },
-      { "source": "/(.*)", "destination": "/api/index.js" }
-    ],
-    "headers": [
-      {
-        "source": "/(.*)",
-        "headers": [
-          { "key": "Access-Control-Allow-Origin", "value": "https://thontrangliennhat.com" },
-          { "key": "Access-Control-Allow-Methods", "value": "GET,POST,PUT,DELETE,OPTIONS" },
-          { "key": "Access-Control-Allow-Headers", "value": "X-Requested-With,Content-Type,Accept,Origin,Authorization,Cache-Control,Pragma,Expires,X-Cache-Control,X-Timestamp,X-Nocache" },
-          { "key": "Access-Control-Max-Age", "value": "86400" },
-          { "key": "Access-Control-Allow-Credentials", "value": "true" },
-          { "key": "Vary", "value": "Origin" }
-        ]
-      },
-      {
-        "source": "/images/(.*)",
-        "headers": [
-          { "key": "Cache-Control", "value": "public, max-age=86400" },
-          { "key": "Access-Control-Allow-Origin", "value": "https://thontrangliennhat.com" },
-          { "key": "Vary", "value": "Origin" }
-        ]
-      },
-      {
-        "source": "/uploads/(.*)",
-        "headers": [
-          { "key": "Cache-Control", "value": "public, max-age=86400" },
-          { "key": "Access-Control-Allow-Origin", "value": "https://thontrangliennhat.com" },
-          { "key": "Vary", "value": "Origin" }
-        ]
-      }
-    ]
-  }
-  
+  "version": 2,
+  "public": true,
+  "builds": [
+    { "src": "api/**/*.js", "use": "@vercel/node" }
+  ],
+  "rewrites": [
+    { "source": "/products/:path*", "destination": "/api/content.js" },
+    { "source": "/services/:path*", "destination": "/api/content.js" },
+    { "source": "/experiences/:path*", "destination": "/api/content.js" },
+    { "source": "/news/:path*", "destination": "/api/content.js" },
+    { "source": "/parent-navs/:path*", "destination": "/api/navigation.js" },
+    { "source": "/child-navs/:path*", "destination": "/api/navigation.js" },
+    { "source": "/navigation-links", "destination": "/api/navigation.js" },
+    { "source": "/teams/:path*", "destination": "/api/teams.js" },
+    { "source": "/options/(.*)", "destination": "/api/options-handler.js" },
+    { "source": "/upload", "destination": "/api/upload.js" },
+    { "source": "/database.json", "destination": "/api/database.js" },
+    { "source": "/thontrangliennhat-api/database.json", "destination": "/api/database.js" },
+    { "source": "/(.*)", "destination": "/api/index.js" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "https://thontrangliennhat.com" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,POST,PUT,DELETE,OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "X-Requested-With,Content-Type,Accept,Origin,Authorization,Cache-Control,Pragma,Expires,X-Cache-Control,X-Timestamp,X-Nocache" },
+        { "key": "Access-Control-Max-Age", "value": "86400" },
+        { "key": "Access-Control-Allow-Credentials", "value": "true" },
+        { "key": "Vary", "value": "Origin" }
+      ]
+    },
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400" },
+        { "key": "Access-Control-Allow-Origin", "value": "https://thontrangliennhat.com" },
+        { "key": "Vary", "value": "Origin" }
+      ]
+    },
+    {
+      "source": "/uploads/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400" },
+        { "key": "Access-Control-Allow-Origin", "value": "https://thontrangliennhat.com" },
+        { "key": "Vary", "value": "Origin" }
+      ]
+    }
+  ]
+}
