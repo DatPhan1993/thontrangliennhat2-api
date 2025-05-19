@@ -5,7 +5,7 @@
       { "src": "api/**/*.js", "use": "@vercel/node" }
     ],
     "rewrites": [
-      { "source": "/(.*)", "methods": ["OPTIONS"], "destination": "/api/options-handler.js" },
+      { "source": "/options/(.*)", "destination": "/api/options-handler.js" },
       { "source": "/products/:path*", "destination": "/api/products/:path*" },
       { "source": "/services/:path*", "destination": "/api/services/:path*" },
       { "source": "/experiences/:path*", "destination": "/api/experiences/:path*" },
