@@ -5,15 +5,19 @@
       { "src": "api/**/*.js", "use": "@vercel/node" }
     ],
     "rewrites": [
+      { "source": "/products/:path*", "destination": "/api/content.js" },
+      { "source": "/services/:path*", "destination": "/api/content.js" },
+      { "source": "/experiences/:path*", "destination": "/api/content.js" },
+      { "source": "/news/:path*", "destination": "/api/content.js" },
+      { "source": "/parent-navs/:path*", "destination": "/api/navigation.js" },
+      { "source": "/child-navs/:path*", "destination": "/api/navigation.js" },
+      { "source": "/navigation-links", "destination": "/api/navigation.js" },
+      { "source": "/teams/:path*", "destination": "/api/teams.js" },
       { "source": "/options/(.*)", "destination": "/api/options-handler.js" },
-      { "source": "/products/:path*", "destination": "/api/products/:path*" },
-      { "source": "/services/:path*", "destination": "/api/services/:path*" },
-      { "source": "/experiences/:path*", "destination": "/api/experiences/:path*" },
-      { "source": "/news/:path*", "destination": "/api/news/:path*" },
       { "source": "/upload", "destination": "/api/upload.js" },
       { "source": "/database.json", "destination": "/api/database.js" },
       { "source": "/thontrangliennhat-api/database.json", "destination": "/api/database.js" },
-      { "source": "/(.*)", "destination": "/api/$1" }
+      { "source": "/(.*)", "destination": "/api/index.js" }
     ],
     "headers": [
       {
