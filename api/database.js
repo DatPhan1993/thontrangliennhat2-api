@@ -10,7 +10,8 @@ module.exports = (req, res) => {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,Accept,Origin,Authorization,cache-control,pragma,expires');
+  res.setHeader('Access-Control-Max-Age', '86400');
   
   // Handle preflight requests
   if (req.method === 'OPTIONS') {
@@ -27,7 +28,9 @@ module.exports = (req, res) => {
     path.join(__dirname, '../database.json'),
     path.join(__dirname, 'database.json'),
     '/var/task/database.json',
-    '/var/task/api/database.json'
+    '/var/task/api/database.json',
+    path.join(process.cwd(), 'database.json'),
+    path.join(process.cwd(), 'api/database.json')
   ];
   
   // Check each possible path

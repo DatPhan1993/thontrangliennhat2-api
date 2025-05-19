@@ -4,6 +4,18 @@
   "builds": [
     { "src": "api/**/*.js", "use": "@vercel/node" }
   ],
+  "buildCommand": "./vercel-build.sh",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,POST,PUT,DELETE,OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "X-Requested-With,Content-Type,Accept,Origin,Authorization,cache-control,pragma,expires" },
+        { "key": "Access-Control-Max-Age", "value": "86400" }
+      ]
+    }
+  ],
   "routes": [
     {
       "src": "/(.*)",
@@ -11,7 +23,7 @@
       "headers": {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization"
+        "Access-Control-Allow-Headers": "Content-Type, Authorization, cache-control, pragma, expires, X-Requested-With, Accept, Origin"
       }
     },
     { "src": "/products/(.*)", "dest": "/api/products/$1" },

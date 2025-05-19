@@ -1,22 +1,29 @@
-const { syncDatabase, readDatabase } = require('../database-utils');
+// Upload API endpoint
+const fs = require('fs');
+const path = require('path');
 
 module.exports = (req, res) => {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
-  // Handle preflight request
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization, cache-control, pragma, expires');
+  res.setHeader('Access-Control-Max-Age', '86400');
+  
+  // Handle preflight requests
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
-
-  // Handle upload logic
-  if (req.method === 'POST') {
-    return res.status(501).json({
-      message: 'For Vercel deployment, file uploads should be handled through a third-party service like AWS S3, Cloudinary, etc.'
-    });
+  
+  // Only allow POST method
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
   }
-
-  return res.status(405).json({ message: 'Method not allowed' });
+  
+  // Return mock response for now
+  // Actual file upload would require multipart form processing
+  return res.status(501).json({
+    status: 'Not Implemented',
+    message: 'File upload functionality is not implemented in this serverless environment',
+    info: 'File uploads should be implemented using a dedicated storage service'
+  });
 }; 

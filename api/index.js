@@ -1,11 +1,13 @@
 // Root API route handler
-const { readDatabase } = require('../database-utils');
+const fs = require('fs');
+const path = require('path');
 
 module.exports = (req, res) => {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization, cache-control, pragma, expires');
+  res.setHeader('Access-Control-Max-Age', '86400');
   
   // Add cache control headers to prevent caching
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
@@ -17,9 +19,33 @@ module.exports = (req, res) => {
     return res.status(200).end();
   }
   
-  // Get the database version or timestamp
-  const db = readDatabase();
-  const dbInfo = db.syncInfo || { lastSync: new Date().toISOString() };
+  // Try to get database info
+  let dbInfo = { lastSync: new Date().toISOString() };
+  try {
+    const possiblePaths = [
+      path.join(__dirname, '../database.json'),
+      path.join(__dirname, 'database.json'),
+      path.join(process.cwd(), 'database.json')
+    ];
+    
+    // Find database file
+    let dbPath = null;
+    for (const path of possiblePaths) {
+      if (fs.existsSync(path)) {
+        dbPath = path;
+        break;
+      }
+    }
+    
+    if (dbPath) {
+      const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
+      if (db.syncInfo) {
+        dbInfo = db.syncInfo;
+      }
+    }
+  } catch (err) {
+    console.error('Error reading database:', err);
+  }
   
   // Return basic API information
   res.json({
@@ -31,7 +57,8 @@ module.exports = (req, res) => {
       products: "/products",
       services: "/services",
       experiences: "/experiences",
-      news: "/news"
+      news: "/news",
+      database: "/database.json"
     },
     documentation: "https://github.com/DatPhan1993/thontrangliennhat2-api",
     message: "Chào mừng đến với API của Thôn Trang Liên Nhật"
