@@ -42,6 +42,14 @@
           { "key": "Vary", "value": "Origin" }
         ]
       }
+    ],
+    "routes": [
+      { "handle": "filesystem" },
+      { 
+        "src": "/(.*)", 
+        "methods": ["OPTIONS"], 
+        "dest": "/api/options-handler.js" 
+      }
     ]
   }
   

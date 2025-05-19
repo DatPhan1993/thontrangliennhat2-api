@@ -6,13 +6,28 @@ const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
 
-// CORS headers to be inserted in all API files
+// CORS headers to be inserted in all API files - with improved origin detection
 const corsHeaders = `
-  // Set CORS headers for all requests
-  res.setHeader('Access-Control-Allow-Origin', 'https://thontrangliennhat.com');
+  // Set CORS headers for requests based on origin
+  const allowedOrigins = [
+    'https://thontrangliennhat.com',
+    'http://thontrangliennhat.com',
+    'http://localhost:3000',
+    'http://localhost:3001'
+  ];
+  
+  const origin = req.headers.origin;
+  
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  } else {
+    res.setHeader('Access-Control-Allow-Origin', 'https://thontrangliennhat.com');
+  }
+  
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization, Cache-Control, Pragma, Expires, X-Cache-Control, X-Timestamp, X-Nocache');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Max-Age', '86400');
   res.setHeader('Vary', 'Origin');
   
   // Handle preflight requests
@@ -33,12 +48,21 @@ let skippedCount = 0;
 
 for (const filePath of apiFiles) {
   try {
+    // Skip the cors middleware files themselves
+    if (filePath.includes('cors-middleware.js') || 
+        filePath.includes('options-handler.js')) {
+      console.log(`Skipping CORS utility file: ${filePath}`);
+      skippedCount++;
+      continue;
+    }
+    
     // Read file content
     let content = fs.readFileSync(filePath, 'utf8');
     
-    // Skip if file already has specific CORS header for thontrangliennhat.com
-    if (content.includes('https://thontrangliennhat.com')) {
-      console.log(`Skipping file (already has CORS headers): ${filePath}`);
+    // Skip if file already has our CORS middleware import
+    if (content.includes('cors-middleware.js') || 
+        content.includes('allowedOrigins')) {
+      console.log(`Skipping file (already has enhanced CORS headers): ${filePath}`);
       skippedCount++;
       continue;
     }
