@@ -68,7 +68,7 @@
       "id": 1,
       "name": "Súp hải sản",
       "images": [
-        "images/uploads/1747304857516-52837735.jpg"
+        "/images/uploads/1747304857516-52837735.jpg"
       ],
       "content": "Súp hải sản là một món ăn ngon, bổ dưỡng, thường được dùng làm món khai vị trong các bữa tiệc hoặc bữa ăn gia đình. Món này kết hợp các loại hải sản như tôm, mực, cua, nghêu… cùng với nước dùng đậm đà, rau củ và trứng, tạo nên hương vị thanh ngọt tự nhiên.",
       "slug": "sup-hai-san",
@@ -413,7 +413,6 @@
       "updatedAt": "2025-05-22T23:01:24.000Z",
       "updated_at": "2025-05-22T23:01:24.000Z"
     }
-    
   ],
   "experiences": [
     {

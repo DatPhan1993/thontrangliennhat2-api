@@ -38,32 +38,7 @@
       "title": "SẢN XUẤT",
       "slug": "san-xuat",
       "position": 4,
-      "children": [
-        {
-          "id": 401,
-          "title": "Gạo Hữu Cơ Liên Nhật",
-          "slug": "gao-huu-co-lien-nhat",
-          "position": 1
-        },
-        {
-          "id": 402,
-          "title": "Cá Rô Đồng",
-          "slug": "ca-ro-dong",
-          "position": 2
-        },
-        {
-          "id": 403,
-          "title": "Tôm Càng Xanh",
-          "slug": "tom-cang-xanh",
-          "position": 3
-        },
-        {
-          "id": 404,
-          "title": "Ốc Bươu",
-          "slug": "oc-buou",
-          "position": 4
-        }
-      ]
+      "children": []
     },
     {
       "id": 5,
@@ -93,7 +68,7 @@
       "id": 1,
       "name": "Súp hải sản",
       "images": [
-        "/images/uploads/1747304857516-52837735.jpg"
+        "images/uploads/1747304857516-52837735.jpg"
       ],
       "content": "Súp hải sản là một món ăn ngon, bổ dưỡng, thường được dùng làm món khai vị trong các bữa tiệc hoặc bữa ăn gia đình. Món này kết hợp các loại hải sản như tôm, mực, cua, nghêu… cùng với nước dùng đậm đà, rau củ và trứng, tạo nên hương vị thanh ngọt tự nhiên.",
       "slug": "sup-hai-san",
@@ -352,7 +327,7 @@
       "title": "Giới thiệu gạo hữu cơ Liên Nhật",
       "slug": "gioi-thieu-gao-huu-co-lien-nhat",
       "summary": "Gạo hữu cơ Liên Nhật là sản phẩm nông nghiệp chất lượng cao, được sản xuất theo mô hình nông nghiệp tuần hoàn tại Hợp tác xã Liên Nhật, Hà Tĩnh.",
-      "content": "🌾 Giới thiệu chung về gạo hữu cơ Liên Nhật\r\nGạo hữu cơ Liên Nhật là sản phẩm nông nghiệp chất lượng cao, được sản xuất theo mô hình nông nghiệp tuần hoàn tại Hợp tác xã Sản xuất Nông nghiệp và Dịch vụ Tổng hợp Liên Nhật, thuộc thôn Trang Liên Nhật, xã Thạch Hạ, thành phố Hà Tĩnh. Đây là mô hình tiên phong tại địa phương trong việc áp dụng sản xuất lúa gạo theo hướng hữu cơ, bền vững, thân thiện với môi trường và mang lại giá trị kinh tế cao.\r\n\r\n🌱 Mô hình sản xuất: Nông nghiệp tuần hoàn \"3 trong 1\"\r\nGạo hữu cơ Liên Nhật được sản xuất theo mô hình nông nghiệp tuần hoàn \"3 trong 1\", bao gồm:\r\n\r\nTrồng lúa hữu cơ:\r\n\r\nSử dụng giống lúa ST25 – giống lúa từng được công nhận là \"ngon nhất thế giới\".\r\n\r\nTuyệt đối không sử dụng thuốc bảo vệ thực vật hóa học hay phân bón vô cơ.\r\n\r\nPhân bón được lấy từ hệ thống nuôi thủy sản ngay dưới ruộng, tạo nguồn dinh dưỡng tự nhiên và an toàn cho cây lúa.\r\n\r\nĐất canh tác được luân canh và chăm sóc bằng các biện pháp sinh học, đảm bảo chất lượng gạo sạch và an toàn.\r\n\r\nNuôi trồng thủy sản kết hợp:\r\n\r\nNuôi cá, tôm càng xanh trong hệ thống mương quanh ruộng lúa.\r\n\r\nPhân thải từ thủy sản góp phần nuôi dưỡng đất trồng, đồng thời giúp kiểm soát côn trùng và cỏ dại một cách tự nhiên.\r\n\r\nPhát triển du lịch sinh thái:\r\n\r\nTrên bờ ruộng trồng các loại hoa tạo cảnh quan, phục vụ khách du lịch tham quan, chụp ảnh và trải nghiệm mô hình nông nghiệp sạch.\r\n\r\nDu khách được trực tiếp tham gia vào các hoạt động sản xuất như gặt lúa, bắt cá, thu hoạch rau…\r\n\r\n🧑‍🌾 Về Hợp tác xã Liên Nhật\r\nTên đầy đủ: Hợp tác xã Sản xuất Nông nghiệp và Dịch vụ Tổng hợp Liên Nhật.\r\n\r\nĐịa chỉ: Thôn Trang Liên Nhật, xã Thạch Hạ, thành phố Hà Tĩnh.\r\n\r\nGiám đốc: Anh Nguyễn Hữu Quyền – một người trẻ từ bỏ công việc kỹ sư xây dựng để quay về quê hương phát triển nông nghiệp hữu cơ, khởi đầu từ niềm đam mê với mô hình canh tác xanh và bền vững.\r\n\r\nDiện tích canh tác: Khoảng 5 ha, được tích tụ từ nhiều hộ dân trong thôn.\r\n\r\n📊 Hiệu quả sản xuất – kinh tế\r\nNăng suất lúa: Trung bình gần 5 tấn/ha.\r\n\r\nSản lượng thủy sản: Khoảng 40 tấn/năm, bao gồm cá, tôm càng xanh và các loại thủy sản khác.\r\n\r\nDoanh thu: Trung bình đạt hàng trăm triệu đồng mỗi năm. Gạo sản xuất ra thường \"cháy hàng\" do nhu cầu cao, đặc biệt trong các dịp lễ Tết.\r\n\r\nTạo việc làm ổn định cho nhiều lao động địa phương, nhất là phụ nữ và người lớn tuổi.\r\n\r\n🍚 Đặc điểm nổi bật của gạo hữu cơ Liên Nhật\r\nChất lượng hạt gạo:\r\n\r\nHạt dài, trắng ngần, bóng đẹp.\r\n\r\nKhi nấu cho cơm dẻo, mềm, thơm dịu, không dính, để nguội vẫn giữ được vị ngon.\r\n\r\nThích hợp cho người ăn kiêng, người già, trẻ em và cả phụ nữ mang thai nhờ hàm lượng dinh dưỡng cao và tuyệt đối an toàn không hóa chất.\r\n\r\nĐảm bảo tiêu chuẩn an toàn thực phẩm:\r\n\r\nGạo được kiểm nghiệm và chứng nhận đạt tiêu chuẩn gạo hữu cơ.\r\n\r\nQuá trình sản xuất được giám sát chặt chẽ từ khâu làm đất đến đóng gói sản phẩm.\r\n\r\n🛒 Giá bán và phân phối\r\nGiá bán tham khảo: Khoảng 175.000 VNĐ/5kg.\r\n\r\nPhân phối:\r\n\r\nQua các sàn thương mại điện tử địa phương.\r\n\r\nCác cửa hàng nông sản sạch.\r\n\r\nĐơn đặt hàng từ cá nhân, doanh nghiệp, trường học, nhà hàng.",
+      "content": "🌾 Giới thiệu chung về gạo hữu cơ Liên Nhật\r\nGạo hữu cơ Liên Nhật là sản phẩm nông nghiệp chất lượng cao, được sản xuất theo mô hình nông nghiệp tuần hoàn tại Hợp tác xã Sản xuất Nông nghiệp và Dịch vụ Tổng hợp Liên Nhật, thuộc thôn Trang Liên Nhật, xã Thạch Hạ, thành phố Hà Tĩnh. Đây là mô hình tiên phong tại địa phương trong việc áp dụng sản xuất lúa gạo theo hướng hữu cơ, bền vững, thân thiện với môi trường và mang lại giá trị kinh tế cao.\r\n\r\n🌱 Mô hình sản xuất: Nông nghiệp tuần hoàn \"3 trong 1\"\r\nGạo hữu cơ Liên Nhật được sản xuất theo mô hình nông nghiệp tuần hoàn “3 trong 1”, bao gồm:\r\n\r\nTrồng lúa hữu cơ:\r\n\r\nSử dụng giống lúa ST25 – giống lúa từng được công nhận là “ngon nhất thế giới”.\r\n\r\nTuyệt đối không sử dụng thuốc bảo vệ thực vật hóa học hay phân bón vô cơ.\r\n\r\nPhân bón được lấy từ hệ thống nuôi thủy sản ngay dưới ruộng, tạo nguồn dinh dưỡng tự nhiên và an toàn cho cây lúa.\r\n\r\nĐất canh tác được luân canh và chăm sóc bằng các biện pháp sinh học, đảm bảo chất lượng gạo sạch và an toàn.\r\n\r\nNuôi trồng thủy sản kết hợp:\r\n\r\nNuôi cá, tôm càng xanh trong hệ thống mương quanh ruộng lúa.\r\n\r\nPhân thải từ thủy sản góp phần nuôi dưỡng đất trồng, đồng thời giúp kiểm soát côn trùng và cỏ dại một cách tự nhiên.\r\n\r\nPhát triển du lịch sinh thái:\r\n\r\nTrên bờ ruộng trồng các loại hoa tạo cảnh quan, phục vụ khách du lịch tham quan, chụp ảnh và trải nghiệm mô hình nông nghiệp sạch.\r\n\r\nDu khách được trực tiếp tham gia vào các hoạt động sản xuất như gặt lúa, bắt cá, thu hoạch rau…\r\n\r\n🧑‍🌾 Về Hợp tác xã Liên Nhật\r\nTên đầy đủ: Hợp tác xã Sản xuất Nông nghiệp và Dịch vụ Tổng hợp Liên Nhật.\r\n\r\nĐịa chỉ: Thôn Trang Liên Nhật, xã Thạch Hạ, thành phố Hà Tĩnh.\r\n\r\nGiám đốc: Anh Nguyễn Hữu Quyền – một người trẻ từ bỏ công việc kỹ sư xây dựng để quay về quê hương phát triển nông nghiệp hữu cơ, khởi đầu từ niềm đam mê với mô hình canh tác xanh và bền vững.\r\n\r\nDiện tích canh tác: Khoảng 5 ha, được tích tụ từ nhiều hộ dân trong thôn.\r\n\r\n📊 Hiệu quả sản xuất – kinh tế\r\nNăng suất lúa: Trung bình gần 5 tấn/ha.\r\n\r\nSản lượng thủy sản: Khoảng 40 tấn/năm, bao gồm cá, tôm càng xanh và các loại thủy sản khác.\r\n\r\nDoanh thu: Trung bình đạt hàng trăm triệu đồng mỗi năm. Gạo sản xuất ra thường “cháy hàng” do nhu cầu cao, đặc biệt trong các dịp lễ Tết.\r\n\r\nTạo việc làm ổn định cho nhiều lao động địa phương, nhất là phụ nữ và người lớn tuổi.\r\n\r\n🍚 Đặc điểm nổi bật của gạo hữu cơ Liên Nhật\r\nChất lượng hạt gạo:\r\n\r\nHạt dài, trắng ngần, bóng đẹp.\r\n\r\nKhi nấu cho cơm dẻo, mềm, thơm dịu, không dính, để nguội vẫn giữ được vị ngon.\r\n\r\nThích hợp cho người ăn kiêng, người già, trẻ em và cả phụ nữ mang thai nhờ hàm lượng dinh dưỡng cao và tuyệt đối an toàn không hóa chất.\r\n\r\nĐảm bảo tiêu chuẩn an toàn thực phẩm:\r\n\r\nGạo được kiểm nghiệm và chứng nhận đạt tiêu chuẩn gạo hữu cơ.\r\n\r\nQuá trình sản xuất được giám sát chặt chẽ từ khâu làm đất đến đóng gói sản phẩm.\r\n\r\n🛒 Giá bán và phân phối\r\nGiá bán tham khảo: Khoảng 175.000 VNĐ/5kg.\r\n\r\nPhân phối:\r\n\r\nQua các sàn thương mại điện tử địa phương.\r\n\r\nCác cửa hàng nông sản sạch.\r\n\r\nĐơn đặt hàng từ cá nhân, doanh nghiệp, trường học, nhà hàng.",
       "description": "🌾 Giới thiệu chung về gạo hữu cơ Liên Nhật\r\nGạo hữu cơ Liên Nhật là sản phẩm nông nghiệp chất lượng cao, được sản xuất theo mô hình nông nghiệp tuần hoàn tại Hợp tác xã Liên Nhật, xã Thạch Hạ, TP. Hà Tĩnh.",
       "child_nav_id": "1",
       "categoryId": 1,
@@ -437,30 +412,8 @@
       "createdAt": "2025-05-22T23:01:24.000Z",
       "updatedAt": "2025-05-22T23:01:24.000Z",
       "updated_at": "2025-05-22T23:01:24.000Z"
-    },
-    {
-      "id": 5,
-      "name": "Ốc Bươu Liên Nhật – Đặc sản sinh thái từ vùng quê hữu cơ",
-      "title": "Ốc Bươu Liên Nhật – Đặc sản sinh thái từ vùng quê hữu cơ",
-      "slug": "oc-buou-lien-nhat",
-      "summary": "Ốc Bươu Liên Nhật được nuôi trong hệ sinh thái nông nghiệp tuần hoàn, không sử dụng hóa chất, mang đến giá trị dinh dưỡng cao và hương vị đặc trưng của đồng quê Hà Tĩnh.",
-      "content": "🐚 Giới thiệu chung về Ốc Bươu Liên Nhật\r\nỐc Bươu Liên Nhật là một sản phẩm đặc trưng trong hệ sinh thái nông nghiệp tuần hoàn tại thôn Trang Liên Nhật, xã Thạch Hạ, thành phố Hà Tĩnh. Với điều kiện tự nhiên thuận lợi và phương pháp nuôi hoàn toàn hữu cơ, ốc bươu ở đây có chất lượng vượt trội, thịt dai, ngọt và sạch.\r\n\r\n🌱 Mô hình nuôi ốc bươu sinh thái\r\nỐc được nuôi kết hợp trong ruộng lúa và ao hồ tự nhiên, không sử dụng thuốc bảo vệ thực vật, phân bón hóa học hay thức ăn công nghiệp. Chúng sinh trưởng nhờ vào nguồn thức ăn tự nhiên như rong rêu, bèo tấm, và phụ phẩm nông nghiệp.\r\n\r\n🧩 Đặc điểm nổi bật của Ốc Bươu Liên Nhật\r\n- Vỏ ốc đen bóng, chắc, không bị bám tạp chất.\r\n- Thịt dày, vị đậm đà, không có mùi tanh.\r\n- Phù hợp chế biến các món đặc sản như ốc hấp sả, ốc xào cay, ốc nướng tiêu xanh…\r\n- An toàn tuyệt đối cho sức khỏe vì không tồn dư kháng sinh hay hóa chất độc hại.\r\n\r\n📊 Hiệu quả kinh tế\r\n- Thời gian nuôi: 3-4 tháng.\r\n- Tỷ lệ sống cao, dễ chăm sóc.\r\n- Sản lượng: khoảng 1.5 - 2 tấn mỗi vụ.\r\n- Giá bán: dao động từ 40.000 – 60.000 VNĐ/kg.\r\n- Lợi nhuận bền vững nhờ chi phí thấp và nhu cầu tiêu thụ ổn định.\r\n\r\n🧑‍🌾 Đơn vị sản xuất\r\n- Hợp tác xã Sản xuất Nông nghiệp và Dịch vụ Tổng hợp Liên Nhật.\r\n- Giám đốc: Nguyễn Hữu Quyền – người tiên phong ứng dụng nông nghiệp sinh thái bền vững tại địa phương.\r\n- Địa chỉ: Thôn Trang Liên Nhật, xã Thạch Hạ, thành phố Hà Tĩnh.\r\n\r\n🛒 Phân phối\r\n- Cung cấp cho chợ quê, nhà hàng, đơn vị chế biến thủy sản sạch.\r\n- Đặt hàng trực tiếp qua các kênh phân phối của hợp tác xã.\r\n- Góp mặt trong các hội chợ sản phẩm OCOP và nông sản Hà Tĩnh.",
-      "description": "🐚 Giới thiệu chung về Ốc Bươu Liên Nhật\r\nỐc Bươu Liên Nhật là một sản phẩm đặc trưng trong hệ sinh thái nông nghiệp tuần hoàn tại thôn Trang Liên Nhật, xã Thạch Hạ, thành phố Hà Tĩnh. Với điều kiện tự nhiên thuận lợi và phương pháp nuôi hoàn toàn hữu cơ, ốc bươu ở đây có chất lượng vượt trội, thịt dai, ngọt và sạch.\r\n\r\n🌱 Mô hình nuôi ốc bươu sinh thái\r\nỐc được nuôi kết hợp trong ruộng lúa và ao hồ tự nhiên, không sử dụng thuốc bảo vệ thực vật, phân bón hóa học hay thức ăn công nghiệp. Chúng sinh trưởng nhờ vào nguồn thức ăn tự nhiên như rong rêu, bèo tấm, và phụ phẩm nông nghiệp.\r\n\r\n🧩 Đặc điểm nổi bật của Ốc Bươu Liên Nhật\r\n- Vỏ ốc đen bóng, chắc, không bị bám tạp chất.\r\n- Thịt dày, vị đậm đà, không có mùi tanh.\r\n- An toàn tuyệt đối cho sức khỏe vì không tồn dư kháng sinh hay hóa chất độc hại.",
-      "child_nav_id": "5",
-      "categoryId": 3,
-      "isFeatured": "1",
-      "views": 0,
-      "type": "san-xuat",
-      "price": 0,
-      "discountPrice": 0,
-      "images": [
-        "/images/uploads/123456.jpg"
-      ],
-      "image": "/images/uploads/oc-buou-lien-nhat-123456.jpg",
-      "createdAt": "2025-05-22T23:33:00.000Z",
-      "updatedAt": "2025-05-22T23:33:00.000Z",
-      "updated_at": "2025-05-22T23:33:00.000Z"
     }
+    
   ],
   "experiences": [
     {
@@ -469,8 +422,8 @@
       "name": "Không gian làng quê yên bình",
       "slug": "hfasd",
       "summary": "Thôn Trang Liên Nhật mang trong mình nét đẹp nguyên sơ của một làng quê Bắc Trung Bộ. Nơi đây nổi bật với hình ảnh những con đường nhỏ uốn quanh bờ ruộng, hai bên rợp bóng tre, cau và hàng rào cây xanh. Cánh đồng lúa trải dài bát ngát, ao cá trong xanh phản chiếu bầu trời, cùng những mái nhà ngói đỏ thấp thoáng sau rặng chuối – tất cả tạo nên một bức tranh quê thanh bình, giản dị.",
-      "description": "Không gian làng quê yên bình – Trở về với thiên nhiên và ký ức tuổi thơ\r\nThôn Trang Liên Nhật mang trong mình nét đẹp nguyên sơ của một làng quê Bắc Trung Bộ. Nơi đây nổi bật với hình ảnh những con đường nhỏ uốn quanh bờ ruộng, hai bên rợp bóng tre, cau và hàng rào cây xanh. Cánh đồng lúa trải dài bát ngát, ao cá trong xanh phản chiếu bầu trời, cùng những mái nhà ngói đỏ thấp thoáng sau rặng chuối – tất cả tạo nên một bức tranh quê thanh bình, giản dị.\r\n\r\nKhông gian ở đây mang lại cảm giác thư giãn và gần gũi, đặc biệt phù hợp cho những du khách đang tìm kiếm một nơi để \"trốn khỏi\" sự ồn ào của thành phố. Mỗi bước chân qua làng là một bước chạm vào quá khứ – nơi tuổi thơ của bao thế hệ từng gắn liền với tiếng gà gáy sáng, tiếng mõ trâu về chiều và mùi rơm mới sau mùa gặt.",
-      "content": "Không gian làng quê yên bình – Trở về với thiên nhiên và ký ức tuổi thơ\r\nThôn Trang Liên Nhật mang trong mình nét đẹp nguyên sơ của một làng quê Bắc Trung Bộ. Nơi đây nổi bật với hình ảnh những con đường nhỏ uốn quanh bờ ruộng, hai bên rợp bóng tre, cau và hàng rào cây xanh. Cánh đồng lúa trải dài bát ngát, ao cá trong xanh phản chiếu bầu trời, cùng những mái nhà ngói đỏ thấp thoáng sau rặng chuối – tất cả tạo nên một bức tranh quê thanh bình, giản dị.\r\n\r\nKhông gian ở đây mang lại cảm giác thư giãn và gần gũi, đặc biệt phù hợp cho những du khách đang tìm kiếm một nơi để \"trốn khỏi\" sự ồn ào của thành phố. Mỗi bước chân qua làng là một bước chạm vào quá khứ – nơi tuổi thơ của bao thế hệ từng gắn liền với tiếng gà gáy sáng, tiếng mõ trâu về chiều và mùi rơm mới sau mùa gặt.",
+      "description": "Không gian làng quê yên bình – Trở về với thiên nhiên và ký ức tuổi thơ\r\nThôn Trang Liên Nhật mang trong mình nét đẹp nguyên sơ của một làng quê Bắc Trung Bộ. Nơi đây nổi bật với hình ảnh những con đường nhỏ uốn quanh bờ ruộng, hai bên rợp bóng tre, cau và hàng rào cây xanh. Cánh đồng lúa trải dài bát ngát, ao cá trong xanh phản chiếu bầu trời, cùng những mái nhà ngói đỏ thấp thoáng sau rặng chuối – tất cả tạo nên một bức tranh quê thanh bình, giản dị.\r\n\r\nKhông gian ở đây mang lại cảm giác thư giãn và gần gũi, đặc biệt phù hợp cho những du khách đang tìm kiếm một nơi để trốn khỏi sự ồn ào của thành phố. Mỗi bước chân qua làng là một bước chạm vào quá khứ – nơi tuổi thơ của bao thế hệ từng gắn liền với tiếng gà gáy sáng, tiếng mõ trâu về chiều và mùi rơm mới sau mùa gặt.",
+      "content": "Không gian làng quê yên bình – Trở về với thiên nhiên và ký ức tuổi thơ\r\nThôn Trang Liên Nhật mang trong mình nét đẹp nguyên sơ của một làng quê Bắc Trung Bộ. Nơi đây nổi bật với hình ảnh những con đường nhỏ uốn quanh bờ ruộng, hai bên rợp bóng tre, cau và hàng rào cây xanh. Cánh đồng lúa trải dài bát ngát, ao cá trong xanh phản chiếu bầu trời, cùng những mái nhà ngói đỏ thấp thoáng sau rặng chuối – tất cả tạo nên một bức tranh quê thanh bình, giản dị.\r\n\r\nKhông gian ở đây mang lại cảm giác thư giãn và gần gũi, đặc biệt phù hợp cho những du khách đang tìm kiếm một nơi để trốn khỏi sự ồn ào của thành phố. Mỗi bước chân qua làng là một bước chạm vào quá khứ – nơi tuổi thơ của bao thế hệ từng gắn liền với tiếng gà gáy sáng, tiếng mõ trâu về chiều và mùi rơm mới sau mùa gặt.",
       "images": [
         "/images/uploads/1747063886430-769371210.jpg"
       ],
@@ -600,8 +553,8 @@
       "id": 1,
       "name": "Nguyễn Hữu Quyền",
       "position": "Giám đốc HTX",
-      "avatar": "/images/teams/director.jpg",
-      "image": "/images/teams/director.jpg",
+      "avatar": "/images/uploads/director.jpg",
+      "image": "/images/uploads/director.jpg",
       "description": "Ông Nguyễn Hữu Quyền có hơn 15 năm kinh nghiệm trong lĩnh vực nông nghiệp và du lịch sinh thái.",
       "createdAt": "2022-01-01T00:00:00.000Z",
       "updatedAt": "2022-01-01T00:00:00.000Z"
@@ -610,8 +563,8 @@
       "id": 2,
       "name": "Võ Tá Quỳnh",
       "position": "Quản Lý Thôn Trang Liên Nhật",
-      "avatar": "/images/teams/manager.jpg",
-      "image": "/images/teams/manager.jpg",
+      "avatar": "/images/uploads/manager.jpg",
+      "image": "/images/uploads/manager.jpg",
       "description": "Ông Võ Tá Quỳnh chuyên về phát triển sản phẩm và marketing cho các sản phẩm nông nghiệp và du lịch.",
       "createdAt": "2022-01-01T00:00:00.000Z",
       "updatedAt": "2022-01-01T00:00:00.000Z"

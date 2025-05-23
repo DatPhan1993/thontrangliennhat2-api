@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Image URLs - Thôn Trang Liên Nhất</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-result {
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .test-result.success {
+            background-color: #f0f8ff;
+            border-color: #4CAF50;
+        }
+        .test-result.error {
+            background-color: #fff0f0;
+            border-color: #f44336;
+        }
+        .image-preview {
+            max-width: 300px;
+            max-height: 200px;
+            border: 1px solid #ccc;
+            margin: 10px 0;
+        }
+        .url-info {
+            font-family: monospace;
+            background: #f5f5f5;
+            padding: 5px;
+            margin: 5px 0;
+            word-break: break-all;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test Image URLs - Thôn Trang Liên Nhất</h1>
+        <p>Testing image URL fixing logic and displaying images from API</p>
+        
+        <div id="results">
+            <div class="loading">Đang test image URLs...</div>
+        </div>
+    </div>
+
+    <script>
+        // API Configuration (same as frontend)
+        const API_CONFIG = {
+            PRODUCTION: 'https://api.thontrangliennhat.com',
+            get BASE_URL() {
+                return this.PRODUCTION;
+            }
+        };
+
+        // Image URL fixer (same logic as frontend)
+        const ImageUtils = {
+            fixImageUrl(url) {
+                if (!url) return '';
+                
+                console.log(`[ImageUtils] Processing URL: ${url}`);
+                
+                // Fix localhost URLs
+                if (typeof url === 'string' && url.includes('localhost:3001')) {
+                    const fixed = url.replace('http://localhost:3001', API_CONFIG.PRODUCTION);
+                    console.log(`[ImageUtils] Fixed localhost URL: ${url} -> ${fixed}`);
+                    return fixed;
+                }
+                
+                // If URL is relative with leading slash, make it absolute
+                if (url.startsWith('/images/') || url.startsWith('/videos/')) {
+                    const fixed = `${API_CONFIG.BASE_URL}${url}`;
+                    console.log(`[ImageUtils] Fixed relative URL with slash: ${url} -> ${fixed}`);
+                    return fixed;
+                }
+                
+                // If URL is relative without leading slash, make it absolute  
+                if (url.startsWith('images/') || url.startsWith('videos/')) {
+                    const fixed = `${API_CONFIG.BASE_URL}/${url}`;
+                    console.log(`[ImageUtils] Fixed relative URL without slash: ${url} -> ${fixed}`);
+                    return fixed;
+                }
+                
+                // If already absolute URL, return as is
+                if (url.startsWith('http://') || url.startsWith('https://')) {
+                    console.log(`[ImageUtils] URL already absolute: ${url}`);
+                    return url;
+                }
+                
+                console.log(`[ImageUtils] URL unchanged: ${url}`);
+                return url;
+            }
+        };
+
+        // Test image loading
+        function testImageUrl(url) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => {
+                    console.log(`✅ Image loaded successfully: ${url}`);
+                    resolve({ url, status: 'success', error: null, naturalWidth: img.naturalWidth, naturalHeight: img.naturalHeight });
+                };
+                img.onerror = (e) => {
+                    console.error(`❌ Image failed to load: ${url}`, e);
+                    resolve({ url, status: 'error', error: e.type || 'Unknown error' });
+                };
+                img.src = url;
+                
+                // Timeout after 10 seconds
+                setTimeout(() => {
+                    console.warn(`⏰ Image loading timeout: ${url}`);
+                    resolve({ url, status: 'timeout', error: 'Timeout after 10s' });
+                }, 10000);
+            });
+        }
+
+        // Test Product component logic
+        async function testProductImages() {
+            try {
+                console.log('🚀 Starting image URL tests...');
+                
+                const response = await fetch(`${API_CONFIG.BASE_URL}/api/products`);
+                const data = await response.json();
+                
+                console.log('📊 API Response:', data);
+                
+                const products = data.data || [];
+                const resultsContainer = document.getElementById('results');
+                resultsContainer.innerHTML = '<h3>🧪 Testing Product Image Logic:</h3>';
+                
+                let successCount = 0;
+                let errorCount = 0;
+
+                // Test first 5 products
+                for (let i = 0; i < Math.min(products.length, 5); i++) {
+                    const product = products[i];
+                    
+                    console.log(`\n📦 Testing product ${i + 1}: ${product.name}`);
+                    console.log('Original images array:', product.images);
+                    
+                    // Simulate Product component logic
+                    let imageToProcess = null;
+                    if (Array.isArray(product.images) && product.images.length > 0) {
+                        imageToProcess = product.images[0];
+                        console.log(`📷 Using first image from array: ${imageToProcess}`);
+                    } else if (typeof product.images === 'string' && product.images.trim() !== '') {
+                        imageToProcess = product.images;
+                        console.log(`📷 Using image string: ${imageToProcess}`);
+                    }
+                    
+                    if (imageToProcess) {
+                        console.log(`\n🔧 Processing image URL for "${product.name}"`);
+                        const fixedUrl = ImageUtils.fixImageUrl(imageToProcess);
+                        console.log(`Fixed URL: ${fixedUrl}`);
+                        
+                        const testResult = await testImageUrl(fixedUrl);
+                        
+                        const div = document.createElement('div');
+                        div.className = `test-result ${testResult.status}`;
+                        
+                        div.innerHTML = `
+                            <h4>📦 ${product.name} (ID: ${product.id})</h4>
+                            <div class="url-info"><strong>Original:</strong> ${imageToProcess}</div>
+                            <div class="url-info"><strong>Fixed URL:</strong> ${fixedUrl}</div>
+                            <div class="url-info">
+                                <strong>Status:</strong> 
+                                ${testResult.status === 'success' ? 
+                                    `✅ Success (${testResult.naturalWidth}x${testResult.naturalHeight})` : 
+                                    `❌ Failed (${testResult.status})`
+                                }
+                            </div>
+                            ${testResult.status === 'success' ? 
+                                `<img src="${fixedUrl}" class="image-preview" alt="${product.name}" loading="lazy">` : 
+                                `<div style="color: red; padding: 10px; background: #ffe6e6;">
+                                    ❌ Error: ${testResult.error || 'Unknown error'}
+                                 </div>`
+                            }
+                        `;
+                        
+                        resultsContainer.appendChild(div);
+                        
+                        if (testResult.status === 'success') successCount++;
+                        else errorCount++;
+                    } else {
+                        console.warn(`⚠️ No valid image found for product: ${product.name}`);
+                        
+                        const div = document.createElement('div');
+                        div.className = 'test-result error';
+                        div.innerHTML = `
+                            <h4>📦 ${product.name} (ID: ${product.id})</h4>
+                            <div style="color: orange;">⚠️ No valid image found</div>
+                            <div class="url-info">Images data: ${JSON.stringify(product.images)}</div>
+                        `;
+                        resultsContainer.appendChild(div);
+                        errorCount++;
+                    }
+                }
+                
+                // Summary
+                const summaryDiv = document.createElement('div');
+                summaryDiv.innerHTML = `
+                    <h3>📊 Test Summary</h3>
+                    <div style="background: #f0f8ff; padding: 15px; border-radius: 5px; margin: 20px 0;">
+                        <strong>✅ Successful: ${successCount}</strong><br>
+                        <strong>❌ Failed: ${errorCount}</strong><br>
+                        <strong>📊 Total tested: ${successCount + errorCount}</strong>
+                    </div>
+                `;
+                resultsContainer.appendChild(summaryDiv);
+                
+                console.log(`\n📊 Test completed! Success: ${successCount}, Failed: ${errorCount}`);
+                
+            } catch (error) {
+                console.error('💥 Test failed:', error);
+                document.getElementById('results').innerHTML = `
+                    <div class="test-result error">
+                        <h3>💥 Test Failed</h3>
+                        <div style="color: red;">Error: ${error.message}</div>
+                        <div>Please check the console for more details.</div>
+                    </div>
+                `;
+            }
+        }
+
+        // Start tests when page loads
+        window.addEventListener('load', () => {
+            console.log('🎯 Page loaded, starting tests...');
+            testProductImages();
+        });
+    </script>
+</body>
+</html> 
