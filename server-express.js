@@ -152,28 +152,38 @@ app.use('/fonts', (req, res, next) => {
   next();
 });
 
-// Create videos directory if it doesn't exist
-const VIDEOS_DIR = path.join(__dirname, 'videos');
-if (!fs.existsSync(VIDEOS_DIR)) {
-  console.log(`Creating videos directory: ${VIDEOS_DIR}`);
-  fs.mkdirSync(VIDEOS_DIR, { recursive: true });
-}
+// Create videos directory if it doesn't exist (only in non-serverless environments)
+if (!process.env.VERCEL) {
+  const VIDEOS_DIR = path.join(__dirname, 'videos');
+  if (!fs.existsSync(VIDEOS_DIR)) {
+    try {
+      console.log(`Creating videos directory: ${VIDEOS_DIR}`);
+      fs.mkdirSync(VIDEOS_DIR, { recursive: true });
+    } catch (err) {
+      console.warn('Could not create videos directory:', err.message);
+    }
+  }
 
-// Create fonts directory if it doesn't exist
-const FONTS_DIR = path.join(__dirname, 'public', 'fonts');
-if (!fs.existsSync(FONTS_DIR)) {
-  console.log(`Creating fonts directory: ${FONTS_DIR}`);
-  fs.mkdirSync(FONTS_DIR, { recursive: true });
-}
+  // Create fonts directory if it doesn't exist (only in non-serverless environments)
+  const FONTS_DIR = path.join(__dirname, 'public', 'fonts');
+  if (!fs.existsSync(FONTS_DIR)) {
+    try {
+      console.log(`Creating fonts directory: ${FONTS_DIR}`);
+      fs.mkdirSync(FONTS_DIR, { recursive: true });
+    } catch (err) {
+      console.warn('Could not create fonts directory:', err.message);
+    }
+  }
 
-// Create an empty placeholder video if it doesn't exist 
-const placeholderVideo = path.join(VIDEOS_DIR, 'placeholder.mp4');
-if (!fs.existsSync(placeholderVideo)) {
-  try {
-    fs.writeFileSync(placeholderVideo, '');
-    console.log('Created placeholder video file');
-  } catch (err) {
-    console.error('Error creating placeholder video:', err);
+  // Create an empty placeholder video if it doesn't exist (only in non-serverless environments)
+  const placeholderVideo = path.join(VIDEOS_DIR, 'placeholder.mp4');
+  if (!fs.existsSync(placeholderVideo)) {
+    try {
+      fs.writeFileSync(placeholderVideo, '');
+      console.log('Created placeholder video file');
+    } catch (err) {
+      console.warn('Could not create placeholder video:', err.message);
+    }
   }
 }
 
@@ -240,14 +250,43 @@ const writeDatabase = (data) => {
 
 // API ROUTES
 
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  try {
+    res.json({ 
+      statusCode: 200,
+      message: 'Server is running',
+      timestamp: new Date().toISOString(),
+      environment: process.env.NODE_ENV || 'development',
+      version: '1.0.0'
+    });
+  } catch (error) {
+    console.error('Health check error:', error);
+    res.status(500).json({
+      statusCode: 500,
+      message: 'Server error',
+      error: error.message
+    });
+  }
+});
+
 // Products routes
 app.get('/api/products', (req, res) => {
-  const db = getDatabase();
-  res.json({ 
-    statusCode: 200,
-    message: 'Success', 
-    data: db.products || [] 
-  });
+  try {
+    const db = getDatabase();
+    res.json({ 
+      statusCode: 200,
+      message: 'Success', 
+      data: db.products || [] 
+    });
+  } catch (error) {
+    console.error('Products API error:', error);
+    res.status(500).json({
+      statusCode: 500,
+      message: 'Error fetching products',
+      error: error.message
+    });
+  }
 });
 
 app.get('/api/san-pham', (req, res) => {
@@ -1038,38 +1077,6 @@ app.get('/api/cors-status', (req, res) => {
         'Access-Control-Allow-Credentials': res.get('Access-Control-Allow-Credentials')
       },
       timestamp: new Date().toISOString()
-    }
-  });
-});
-
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-  const db = getDatabase();
-  res.json({
-    statusCode: 200,
-    message: 'API Server is running',
-    data: {
-      server: 'thontrangliennhat2-api',
-      version: '1.0.0',
-      timestamp: new Date().toISOString(),
-      port: PORT,
-      environment: process.env.NODE_ENV || 'development',
-      database: {
-        status: db ? 'connected' : 'error',
-        collections: db ? Object.keys(db) : []
-      },
-      endpoints: [
-        '/api/products',
-        '/api/services', 
-        '/api/news',
-        '/api/teams',
-        '/api/images',
-        '/api/videos',
-        '/api/experiences',
-        '/api/contact',
-        '/api/cors-status',
-        '/api/health'
-      ]
     }
   });
 });
