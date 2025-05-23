@@ -6,34 +6,34 @@
       "use": "@vercel/node"
     }
   ],
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "/server-express.js"
+      "source": "/api/(.*)",
+      "destination": "/server-express.js"
     },
     {
-      "src": "/images/(.*)",
-      "dest": "/server-express.js"
+      "source": "/images/(.*)",
+      "destination": "/server-express.js"
     },
     {
-      "src": "/videos/(.*)",
-      "dest": "/server-express.js"
+      "source": "/videos/(.*)",
+      "destination": "/server-express.js"
     },
     {
-      "src": "/uploads/(.*)",
-      "dest": "/server-express.js"
+      "source": "/uploads/(.*)",
+      "destination": "/server-express.js"
     },
     {
-      "src": "/fonts/(.*)",
-      "dest": "/server-express.js"
+      "source": "/fonts/(.*)",
+      "destination": "/server-express.js"
     },
     {
-      "src": "/styles/(.*)",
-      "dest": "/server-express.js"
+      "source": "/styles/(.*)",
+      "destination": "/server-express.js"
     },
     {
-      "src": "/(.*)",
-      "dest": "/server-express.js"
+      "source": "/(.*)",
+      "destination": "/server-express.js"
     }
   ],
   "headers": [
