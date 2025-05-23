@@ -126,7 +126,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Improved static file serving configuration
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+  maxAge: '1y', // Cache static files for 1 year
+  etag: false
+}));
 app.use('/styles', express.static(path.join(__dirname, 'public', 'styles')));
 app.use('/css', express.static(path.join(__dirname, 'public', 'styles')));
 app.use('/fonts', express.static(path.join(__dirname, 'public', 'fonts')));
@@ -150,6 +153,29 @@ app.use('/fonts', (req, res, next) => {
   res.header('Cache-Control', 'public, max-age=31536000');
   
   next();
+});
+
+// Explicit favicon routes for better control (moved here for priority)
+app.get('/favicon.ico', (req, res) => {
+  const faviconPath = path.join(__dirname, 'public', 'favicon.ico');
+  if (fs.existsSync(faviconPath)) {
+    res.setHeader('Content-Type', 'image/x-icon');
+    res.setHeader('Cache-Control', 'public, max-age=31536000');
+    res.sendFile(faviconPath);
+  } else {
+    res.status(204).set({'Content-Type': 'image/x-icon'}).end();
+  }
+});
+
+app.get('/favicon.png', (req, res) => {
+  const faviconPath = path.join(__dirname, 'public', 'favicon.png');
+  if (fs.existsSync(faviconPath)) {
+    res.setHeader('Content-Type', 'image/png');
+    res.setHeader('Cache-Control', 'public, max-age=31536000');
+    res.sendFile(faviconPath);
+  } else {
+    res.status(204).set({'Content-Type': 'image/png'}).end();
+  }
 });
 
 // Create videos directory if it doesn't exist (only in non-serverless environments)
@@ -1835,27 +1861,6 @@ app.delete('/api/contact/:id', (req, res) => {
       message: 'Server error',
       data: null
     });
-  }
-});
-
-// Add favicon handling
-app.get('/favicon.ico', (req, res) => {
-  const faviconPath = path.join(__dirname, 'public', 'favicon.ico');
-  if (fs.existsSync(faviconPath)) {
-    res.sendFile(faviconPath);
-  } else {
-    // Return empty response for favicon
-    res.status(204).set({'Content-Type': 'image/x-icon'}).end();
-  }
-});
-
-app.get('/favicon.png', (req, res) => {
-  const faviconPath = path.join(__dirname, 'public', 'favicon.png');
-  if (fs.existsSync(faviconPath)) {
-    res.sendFile(faviconPath);
-  } else {
-    // Return empty response for favicon
-    res.status(204).set({'Content-Type': 'image/png'}).end();
   }
 });
 
