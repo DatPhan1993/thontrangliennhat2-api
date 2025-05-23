@@ -59,7 +59,7 @@
       ]
     },
     {
-      "source": "/(.*\\.(css|js|jpg|jpeg|png|gif|webp|svg|ico|woff|woff2|ttf|eot))",
+      "source": "/(.*)\\.(css|js|jpg|jpeg|png|gif|webp|svg|ico|woff|woff2|ttf|eot)",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
