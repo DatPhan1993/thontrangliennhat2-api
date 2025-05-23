@@ -285,6 +285,30 @@ const writeDatabase = (data) => {
 
 // API ROUTES
 
+// Root route - API information
+app.get('/', (req, res) => {
+  res.json({
+    statusCode: 200,
+    message: 'Thôn Trang Liên Nhật API Server',
+    version: '1.0.0',
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development',
+    endpoints: {
+      health: '/api/health',
+      products: '/api/products',
+      services: '/api/services',
+      teams: '/api/teams',
+      news: '/api/news',
+      images: '/api/images',
+      videos: '/api/videos',
+      experiences: '/api/experiences',
+      contact: '/api/contact',
+      navigation: '/api/parent-navs/all-with-child'
+    },
+    documentation: 'https://github.com/DatPhan1993/thontrangliennhat2-api'
+  });
+});
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   try {
