@@ -75,13 +75,39 @@ app.use(cors(corsOptions));
 app.use((req, res, next) => {
   // Set security headers
   res.header('X-Content-Type-Options', 'nosniff');
-  res.header('X-Frame-Options', 'DENY');
+  res.header('X-Frame-Options', 'SAMEORIGIN'); // Changed from DENY to SAMEORIGIN
   res.header('X-XSS-Protection', '1; mode=block');
   
+  // Add proper Content Security Policy
+  const csp = [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "font-src 'self' https://fonts.gstatic.com data:",
+    "img-src 'self' data: https: http:",
+    "media-src 'self' data:",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "frame-ancestors 'self'",
+    "connect-src 'self' https: http:"
+  ].join('; ');
+  
+  res.header('Content-Security-Policy', csp);
+  
   // Custom CORS handling for specific file types
-  if (req.path.endsWith('.css') || req.path.endsWith('.js') || req.path.match(/\.(jpg|jpeg|png|gif|webp|svg|ico)$/i)) {
+  if (req.path.endsWith('.css') || req.path.endsWith('.js') || req.path.match(/\.(jpg|jpeg|png|gif|webp|svg|ico|woff|woff2|ttf|eot)$/i)) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Cache-Control', 'public, max-age=31536000'); // 1 year cache for static assets
+  }
+  
+  // Set proper content type for fonts
+  if (req.path.match(/\.(woff|woff2)$/i)) {
+    res.header('Content-Type', 'font/woff');
+  } else if (req.path.match(/\.ttf$/i)) {
+    res.header('Content-Type', 'font/ttf');
+  } else if (req.path.match(/\.eot$/i)) {
+    res.header('Content-Type', 'application/vnd.ms-fontobject');
   }
   
   next();
@@ -103,6 +129,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/styles', express.static(path.join(__dirname, 'public', 'styles')));
 app.use('/css', express.static(path.join(__dirname, 'public', 'styles')));
+app.use('/fonts', express.static(path.join(__dirname, 'public', 'fonts')));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/images/teams', express.static(path.join(__dirname, 'images', 'teams')));
 app.use('/uploads', express.static(path.join(__dirname, 'images', 'uploads')));
@@ -111,11 +138,32 @@ app.use('/images/uploads', express.static(path.join(__dirname, 'images', 'upload
 // Create additional static directory for videos
 app.use('/videos', express.static(path.join(__dirname, 'videos')));
 
+// Font file handling middleware
+app.use('/assets/fonts', express.static(path.join(__dirname, 'public', 'fonts')));
+app.use('/fonts', (req, res, next) => {
+  // Set proper CORS for fonts
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cache-Control');
+  
+  // Set proper cache headers for fonts
+  res.header('Cache-Control', 'public, max-age=31536000');
+  
+  next();
+});
+
 // Create videos directory if it doesn't exist
 const VIDEOS_DIR = path.join(__dirname, 'videos');
 if (!fs.existsSync(VIDEOS_DIR)) {
   console.log(`Creating videos directory: ${VIDEOS_DIR}`);
   fs.mkdirSync(VIDEOS_DIR, { recursive: true });
+}
+
+// Create fonts directory if it doesn't exist
+const FONTS_DIR = path.join(__dirname, 'public', 'fonts');
+if (!fs.existsSync(FONTS_DIR)) {
+  console.log(`Creating fonts directory: ${FONTS_DIR}`);
+  fs.mkdirSync(FONTS_DIR, { recursive: true });
 }
 
 // Create an empty placeholder video if it doesn't exist 
