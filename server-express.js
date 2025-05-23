@@ -1866,6 +1866,30 @@ app.get('/api/*', (req, res) => {
   }
 });
 
+// Fix tools routes
+app.get('/fix-guide.html', (req, res) => {
+  const fixGuidePath = path.join(__dirname, 'public', 'fix-guide.html');
+  if (fs.existsSync(fixGuidePath)) {
+    res.setHeader('Content-Type', 'text/html');
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.sendFile(fixGuidePath);
+  } else {
+    res.status(404).json({ error: 'Fix guide not found' });
+  }
+});
+
+app.get('/fix-cache.js', (req, res) => {
+  const fixCachePath = path.join(__dirname, 'public', 'fix-cache.js');
+  if (fs.existsSync(fixCachePath)) {
+    res.setHeader('Content-Type', 'application/javascript');
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.sendFile(fixCachePath);
+  } else {
+    res.status(404).json({ error: 'Fix cache script not found' });
+  }
+});
+
 // Contact routes - Get all messages
 app.get('/api/contact', (req, res) => {
   const db = getDatabase();
