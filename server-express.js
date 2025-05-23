@@ -75,22 +75,22 @@ app.use(cors(corsOptions));
 app.use((req, res, next) => {
   // Set security headers
   res.header('X-Content-Type-Options', 'nosniff');
-  res.header('X-Frame-Options', 'SAMEORIGIN'); // Changed from DENY to SAMEORIGIN
+  res.header('X-Frame-Options', 'SAMEORIGIN');
   res.header('X-XSS-Protection', '1; mode=block');
   
-  // Add proper Content Security Policy
+  // Updated Content Security Policy with better font support
   const csp = [
     "default-src 'self'",
     "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-    "font-src 'self' https://fonts.gstatic.com data:",
-    "img-src 'self' data: https: http:",
-    "media-src 'self' data:",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com",
+    "font-src 'self' 'unsafe-inline' https://fonts.gstatic.com https://fonts.googleapis.com data: blob:",
+    "img-src 'self' data: https: http: blob:",
+    "media-src 'self' data: blob:",
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
     "frame-ancestors 'self'",
-    "connect-src 'self' https: http:"
+    "connect-src 'self' https: http: wss: ws:"
   ].join('; ');
   
   res.header('Content-Security-Policy', csp);
@@ -103,7 +103,7 @@ app.use((req, res, next) => {
   
   // Set proper content type for fonts
   if (req.path.match(/\.(woff|woff2)$/i)) {
-    res.header('Content-Type', 'font/woff');
+    res.header('Content-Type', 'font/woff2');
   } else if (req.path.match(/\.ttf$/i)) {
     res.header('Content-Type', 'font/ttf');
   } else if (req.path.match(/\.eot$/i)) {
@@ -189,12 +189,21 @@ if (!process.env.VERCEL) {
 
 // Add a route to handle fallback for missing stylesheets
 app.get('*.css', (req, res, next) => {
-  // If the requested CSS file doesn't exist, serve a default one
   const requestedPath = path.join(__dirname, req.path);
   if (!fs.existsSync(requestedPath)) {
-    console.log(`CSS file not found: ${req.path}, serving fallback`);
+    console.log(`CSS file not found: ${req.path}, returning empty CSS`);
     res.setHeader('Content-Type', 'text/css');
-    return res.sendFile(path.join(__dirname, 'public', 'styles', 'main.css'));
+    return res.send('/* File not found */');
+  }
+  next();
+});
+
+app.get('*.js', (req, res, next) => {
+  const requestedPath = path.join(__dirname, req.path);
+  if (!fs.existsSync(requestedPath)) {
+    console.log(`JS file not found: ${req.path}, returning empty JS`);
+    res.setHeader('Content-Type', 'application/javascript');
+    return res.send('// File not found');
   }
   next();
 });
@@ -1826,6 +1835,27 @@ app.delete('/api/contact/:id', (req, res) => {
       message: 'Server error',
       data: null
     });
+  }
+});
+
+// Add favicon handling
+app.get('/favicon.ico', (req, res) => {
+  const faviconPath = path.join(__dirname, 'public', 'favicon.ico');
+  if (fs.existsSync(faviconPath)) {
+    res.sendFile(faviconPath);
+  } else {
+    // Return empty response for favicon
+    res.status(204).set({'Content-Type': 'image/x-icon'}).end();
+  }
+});
+
+app.get('/favicon.png', (req, res) => {
+  const faviconPath = path.join(__dirname, 'public', 'favicon.png');
+  if (fs.existsSync(faviconPath)) {
+    res.sendFile(faviconPath);
+  } else {
+    // Return empty response for favicon
+    res.status(204).set({'Content-Type': 'image/png'}).end();
   }
 });
 
