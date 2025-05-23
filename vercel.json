@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "thontrangliennhat-api",
   "builds": [
     {
       "src": "server-express.js",
@@ -35,6 +34,11 @@
   "functions": {
     "server-express.js": {
       "maxDuration": 30
+    }
+  },
+  "build": {
+    "env": {
+      "NODE_ENV": "production"
     }
   }
 } 
