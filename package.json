@@ -7,7 +7,6 @@
     "build": "echo 'No build step required for Node.js API'",
     "start": "node server-express.js",
     "dev": "node server-express.js",
-    "install": "npm install",
     "deploy": "vercel --prod",
     "deploy-preview": "vercel",
     "test": "echo 'No tests specified'"
