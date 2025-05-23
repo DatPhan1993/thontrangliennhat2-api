@@ -1,79 +1,153 @@
 # Thôn Trang Liên Nhật API
 
-A simple serverless API for Thôn Trang Liên Nhật website.
+API server cho website Thôn Trang Liên Nhật được xây dựng với Express.js và có thể deploy trên Vercel.
 
-## Features
+## 🚀 Quick Start
 
-- Serverless API deployed to Vercel
-- Simple JSON database
-- Endpoints for products, services, experiences, and news
-
-## Development
-
-1. Install dependencies:
+### Development
 ```bash
+# Install dependencies
 npm install
-```
 
-2. Run development server:
-```bash
+# Start development server
 npm run dev
 ```
 
-## Deployment
-
-### Deploy to Vercel
-
-1. Install Vercel CLI globally (if not already installed):
+### Production Deployment
 ```bash
-npm install -g vercel
-```
-
-2. Login to Vercel (if not already logged in):
-```bash
-vercel login
-```
-
-3. Deploy to production:
-```bash
+# Deploy to Vercel
 npm run deploy
+
+# Or use the deployment script
+./deploy.sh
 ```
 
-Or deploy directly with Vercel CLI:
+## 🌐 API Endpoints
+
+### Core Endpoints
+- `GET /api/health` - Health check
+- `GET /api/cors-status` - CORS configuration status
+
+### Content Endpoints
+- `GET /api/products` - Danh sách sản phẩm
+- `GET /api/services` - Danh sách dịch vụ
+- `GET /api/teams` - Thông tin đội ngũ
+- `GET /api/news` - Tin tức
+- `GET /api/images` - Hình ảnh
+- `GET /api/videos` - Video
+- `GET /api/experiences` - Trải nghiệm
+
+### Contact
+- `GET /api/contact` - Lấy danh sách tin nhắn
+- `POST /api/contact` - Gửi tin nhắn mới
+- `DELETE /api/contact/:id` - Xóa tin nhắn
+
+## 🔧 Configuration
+
+### Environment Variables
+- `NODE_ENV` - Environment (development/production)
+- `PORT` - Server port (default: 3001)
+- `VERCEL` - Set by Vercel platform
+
+### CORS Configuration
+API được cấu hình để chấp nhận requests từ:
+- `http://localhost:3000` - React development server
+- `https://thontrangliennhat.com` - Production domain
+- `https://www.thontrangliennhat.com` - Production domain with www
+- `https://thontrangliennhat-api.vercel.app` - Vercel API domain
+- `https://api.thontrangliennhat.com` - Custom API domain
+
+## 📁 Project Structure
+
+```
+thontrangliennhat2-api/
+├── server-express.js    # Main server file
+├── vercel.json         # Vercel configuration
+├── package.json        # Dependencies and scripts
+├── deploy.sh           # Deployment script
+├── api/               # Database files
+├── images/            # Static image assets
+├── videos/            # Static video assets
+├── public/            # Static public assets
+├── CORS-CONFIG.md     # CORS documentation
+├── DEPLOYMENT.md      # Deployment guide
+└── README.md          # This file
+```
+
+## 🚀 Deployment
+
+### Vercel Platform
+1. Install Vercel CLI: `npm i -g vercel`
+2. Login: `vercel login`
+3. Deploy: `npm run deploy` or `./deploy.sh`
+
+### Custom Domain Setup
+1. Add domain in Vercel Dashboard
+2. Configure DNS records
+3. Domain: `api.thontrangliennhat.com`
+
+## 🧪 Testing
+
+### Local Testing
 ```bash
-vercel --prod
+# Test health endpoint
+curl http://localhost:3001/api/health
+
+# Test CORS
+curl -H "Origin: https://thontrangliennhat.com" \
+     http://localhost:3001/api/cors-status
 ```
 
-### Environment Setup in Vercel Dashboard
+### Production Testing
+```bash
+# Test deployed API
+curl https://thontrangliennhat-api.vercel.app/api/health
 
-In the Vercel dashboard under project settings > Build & Development Settings:
+# Test custom domain (after DNS setup)
+curl https://api.thontrangliennhat.com/api/health
+```
 
-1. Build Command: Leave empty (uses package.json build script)
-2. Output Directory: Leave empty
-3. Install Command: `npm install`
-4. Development Command: `npm run dev`
+## 📊 Monitoring
 
-## API Endpoints
+### Vercel Dashboard
+- View deployment logs
+- Monitor function performance
+- Check error rates
 
-- `GET /` - API information
-- `GET /products` - List all products
-- `GET /services` - List all services
-- `GET /experiences` - List all experiences
-- `GET /news` - List all news
-- `GET /database.json` - Get entire database
+### Debug Commands
+```bash
+# View logs
+vercel logs
 
-## Database Structure
+# Follow logs in real-time
+vercel logs --follow
+```
 
-The database is stored in `database.json` at the root of the project with the following structure:
+## 🔒 Security Features
 
-```json
-{
-  "products": [],
-  "services": [],
-  "experiences": [],
-  "news": [],
-  "syncInfo": {
-    "lastSync": "2023-05-19T10:34:00Z"
-  }
-}
-``` 
+- ✅ CORS properly configured
+- ✅ Security headers enabled
+- ✅ File upload limits set
+- ✅ Origin validation implemented
+- ✅ Request logging enabled
+
+## 📝 Documentation
+
+- [CORS Configuration](./CORS-CONFIG.md)
+- [Deployment Guide](./DEPLOYMENT.md)
+
+## 🛠️ Development
+
+### Adding New Endpoints
+1. Add route in `server-express.js`
+2. Update CORS if needed
+3. Test locally
+4. Deploy to Vercel
+
+### Database
+- JSON-based database in `api/database.json`
+- For production, consider external database
+
+## 📞 Support
+
+For issues or questions, check the documentation files or review the server logs. 

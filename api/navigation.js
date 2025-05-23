@@ -9,10 +9,8 @@ const path = require('path');
 const corsMiddleware = (req, res) => {
   // Define allowed origins
   const allowedOrigins = [
-    'https://thontrangliennhat.com',
-    'http://thontrangliennhat.com',
     'http://localhost:3000',
-    'http://localhost:3001'
+    'http://127.0.0.1:3000'
   ];
   
   // Get the origin from the request headers
@@ -23,11 +21,11 @@ const corsMiddleware = (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', origin);
   } else {
     // For requests without origin header or from non-allowed origins
-    res.setHeader('Access-Control-Allow-Origin', 'https://thontrangliennhat.com');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   }
   
   // Set standard CORS headers for all requests
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization, Cache-Control, Pragma, Expires, X-Cache-Control, X-Timestamp, X-Nocache');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Max-Age', '86400'); // 24 hours
@@ -66,7 +64,7 @@ module.exports = (req, res) => {
   // /navigation - get all navigation
   // /navigation/parent-navs - get all parent navs
   // /navigation/parent-navs/123 - get parent nav with ID 123
-  // /navigation/parent-navs/slug/dich-vu - get parent nav by slug
+  // /navigation/parent-navs/slug/san-xuat - get parent nav by slug
   // /navigation/child-navs - get all child navs
   // /navigation/child-navs/123 - get child nav with ID 123
   const parts = url.split('/').filter(p => p);

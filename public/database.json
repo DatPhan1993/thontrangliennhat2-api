@@ -35,8 +35,8 @@
     },
     {
       "id": 4,
-      "title": "DỊCH VỤ",
-      "slug": "dich-vu",
+      "title": "SẢN XUẤT",
+      "slug": "san-xuat",
       "position": 4,
       "children": []
     },
@@ -323,21 +323,21 @@
   "services": [
     {
       "id": 1,
-      "name": "Du lịch trải nghiệm nông nghiệp – Gắn kết với đời sống làng quê",
-      "title": "Du lịch trải nghiệm nông nghiệp – Gắn kết với đời sống làng quê",
-      "slug": "fghjfgj",
-      "summary": "Du lịch trải nghiệm nông nghiệp – Gắn kết với đời sống làng quê Đến với Trang Liên Nhật, du khách sẽ được hòa mình vào không gian làng quê trong lành, bình dị với những cánh đồng xanh mướt, ao cá yên ả và những con đường rợp bóng tre. Tại đây, hình thức du lịch trải nghiệm nông nghiệp được tổ chức một cách bài bản, mang lại cơ hội để du khách – đặc biệt là học sinh, sinh viên và du khách đô thị – hiểu hơn về cuộc sống lao động của người nông dân.",
-      "content": "Du lịch trải nghiệm nông nghiệp – Gắn kết với đời sống làng quê\r\nĐến với Trang Liên Nhật, du khách sẽ được hòa mình vào không gian làng quê trong lành, bình dị với những cánh đồng xanh mướt, ao cá yên ả và những con đường rợp bóng tre. Tại đây, hình thức du lịch trải nghiệm nông nghiệp được tổ chức một cách bài bản, mang lại cơ hội để du khách – đặc biệt là học sinh, sinh viên và du khách đô thị – hiểu hơn về cuộc sống lao động của người nông dân.\r\n\r\nCác hoạt động tiêu biểu bao gồm:\r\n\r\nTrải nghiệm trồng rau, trồng lúa, thu hoạch mùa vụ.\r\n\r\nChăm sóc đàn gia súc, gia cầm như: cho lợn ăn, lùa vịt ra đồng, nhặt trứng gà.\r\n\r\nHọc cách làm vườn, tưới cây, sử dụng nông cụ truyền thống như cày, bừa, gánh nước bằng đòn gánh.\r\n\r\nCâu cá, tát ao bắt cá – một hoạt động vui nhộn và được yêu thích bởi cả người lớn lẫn trẻ em.\r\n\r\nDu khách không chỉ quan sát mà còn trực tiếp tham gia vào công việc, qua đó cảm nhận được giá trị của lao động chân tay, sự gắn bó giữa con người và thiên nhiên, cũng như tình cảm nồng hậu của người dân quê.\r\n\r\n",
-      "description": "Du lịch trải nghiệm nông nghiệp – Gắn kết với đời sống làng quê\r\nĐến với Trang Liên Nhật, du khách sẽ được hòa mình vào không gian làng quê trong lành, bình dị với những cánh đồng xanh mướt, ao cá yên ả và những con đường rợp bóng tre. Tại đây, hình thức du lịch trải nghiệm nông nghiệp được tổ chức một cách bài bản, mang lại cơ hội để du khách – đặc biệt là học sinh, sinh viên và du khách đô thị – hiểu hơn về cuộc sống lao động của người nông dân.\r\n\r\nCác hoạt động tiêu biểu bao gồm:\r\n\r\nTrải nghiệm trồng rau, trồng lúa, thu hoạch mùa vụ.\r\n\r\nChăm sóc đàn gia súc, gia cầm như: cho lợn ăn, lùa vịt ra đồng, nhặt trứng gà.\r\n\r\nHọc cách làm vườn, tưới cây, sử dụng nông cụ truyền thống như cày, bừa, gánh nước bằng đòn gánh.\r\n\r\nCâu cá, tát ao bắt cá – một hoạt động vui nhộn và được yêu thích bởi cả người lớn lẫn trẻ em.\r\n\r\nDu khách không chỉ quan sát mà còn trực tiếp tham gia vào công việc, qua đó cảm nhận được giá trị của lao động chân tay, sự gắn bó giữa con người và thiên nhiên, cũng như tình cảm nồng hậu của người dân quê.\r\n\r\n",
+      "name": "Giới thiệu gạo hữu cơ Liên Nhật",
+      "title": "Giới thiệu gạo hữu cơ Liên Nhật",
+      "slug": "gioi-thieu-gao-huu-co-lien-nhat",
+      "summary": "Gạo hữu cơ Liên Nhật là sản phẩm nông nghiệp chất lượng cao, được sản xuất theo mô hình nông nghiệp tuần hoàn tại Hợp tác xã Liên Nhật, Hà Tĩnh.",
+      "content": "🌾 Giới thiệu chung về gạo hữu cơ Liên Nhật\r\nGạo hữu cơ Liên Nhật là sản phẩm nông nghiệp chất lượng cao, được sản xuất theo mô hình nông nghiệp tuần hoàn tại Hợp tác xã Sản xuất Nông nghiệp và Dịch vụ Tổng hợp Liên Nhật, thuộc thôn Trang Liên Nhật, xã Thạch Hạ, thành phố Hà Tĩnh. Đây là mô hình tiên phong tại địa phương trong việc áp dụng sản xuất lúa gạo theo hướng hữu cơ, bền vững, thân thiện với môi trường và mang lại giá trị kinh tế cao.\r\n\r\n🌱 Mô hình sản xuất: Nông nghiệp tuần hoàn \"3 trong 1\"\r\nGạo hữu cơ Liên Nhật được sản xuất theo mô hình nông nghiệp tuần hoàn “3 trong 1”, bao gồm:\r\n\r\nTrồng lúa hữu cơ:\r\n\r\nSử dụng giống lúa ST25 – giống lúa từng được công nhận là “ngon nhất thế giới”.\r\n\r\nTuyệt đối không sử dụng thuốc bảo vệ thực vật hóa học hay phân bón vô cơ.\r\n\r\nPhân bón được lấy từ hệ thống nuôi thủy sản ngay dưới ruộng, tạo nguồn dinh dưỡng tự nhiên và an toàn cho cây lúa.\r\n\r\nĐất canh tác được luân canh và chăm sóc bằng các biện pháp sinh học, đảm bảo chất lượng gạo sạch và an toàn.\r\n\r\nNuôi trồng thủy sản kết hợp:\r\n\r\nNuôi cá, tôm càng xanh trong hệ thống mương quanh ruộng lúa.\r\n\r\nPhân thải từ thủy sản góp phần nuôi dưỡng đất trồng, đồng thời giúp kiểm soát côn trùng và cỏ dại một cách tự nhiên.\r\n\r\nPhát triển du lịch sinh thái:\r\n\r\nTrên bờ ruộng trồng các loại hoa tạo cảnh quan, phục vụ khách du lịch tham quan, chụp ảnh và trải nghiệm mô hình nông nghiệp sạch.\r\n\r\nDu khách được trực tiếp tham gia vào các hoạt động sản xuất như gặt lúa, bắt cá, thu hoạch rau…\r\n\r\n🧑‍🌾 Về Hợp tác xã Liên Nhật\r\nTên đầy đủ: Hợp tác xã Sản xuất Nông nghiệp và Dịch vụ Tổng hợp Liên Nhật.\r\n\r\nĐịa chỉ: Thôn Trang Liên Nhật, xã Thạch Hạ, thành phố Hà Tĩnh.\r\n\r\nGiám đốc: Anh Nguyễn Hữu Quyền – một người trẻ từ bỏ công việc kỹ sư xây dựng để quay về quê hương phát triển nông nghiệp hữu cơ, khởi đầu từ niềm đam mê với mô hình canh tác xanh và bền vững.\r\n\r\nDiện tích canh tác: Khoảng 5 ha, được tích tụ từ nhiều hộ dân trong thôn.\r\n\r\n📊 Hiệu quả sản xuất – kinh tế\r\nNăng suất lúa: Trung bình gần 5 tấn/ha.\r\n\r\nSản lượng thủy sản: Khoảng 40 tấn/năm, bao gồm cá, tôm càng xanh và các loại thủy sản khác.\r\n\r\nDoanh thu: Trung bình đạt hàng trăm triệu đồng mỗi năm. Gạo sản xuất ra thường “cháy hàng” do nhu cầu cao, đặc biệt trong các dịp lễ Tết.\r\n\r\nTạo việc làm ổn định cho nhiều lao động địa phương, nhất là phụ nữ và người lớn tuổi.\r\n\r\n🍚 Đặc điểm nổi bật của gạo hữu cơ Liên Nhật\r\nChất lượng hạt gạo:\r\n\r\nHạt dài, trắng ngần, bóng đẹp.\r\n\r\nKhi nấu cho cơm dẻo, mềm, thơm dịu, không dính, để nguội vẫn giữ được vị ngon.\r\n\r\nThích hợp cho người ăn kiêng, người già, trẻ em và cả phụ nữ mang thai nhờ hàm lượng dinh dưỡng cao và tuyệt đối an toàn không hóa chất.\r\n\r\nĐảm bảo tiêu chuẩn an toàn thực phẩm:\r\n\r\nGạo được kiểm nghiệm và chứng nhận đạt tiêu chuẩn gạo hữu cơ.\r\n\r\nQuá trình sản xuất được giám sát chặt chẽ từ khâu làm đất đến đóng gói sản phẩm.\r\n\r\n🛒 Giá bán và phân phối\r\nGiá bán tham khảo: Khoảng 175.000 VNĐ/5kg.\r\n\r\nPhân phối:\r\n\r\nQua các sàn thương mại điện tử địa phương.\r\n\r\nCác cửa hàng nông sản sạch.\r\n\r\nĐơn đặt hàng từ cá nhân, doanh nghiệp, trường học, nhà hàng.",
+      "description": "🌾 Giới thiệu chung về gạo hữu cơ Liên Nhật\r\nGạo hữu cơ Liên Nhật là sản phẩm nông nghiệp chất lượng cao, được sản xuất theo mô hình nông nghiệp tuần hoàn tại Hợp tác xã Liên Nhật, xã Thạch Hạ, TP. Hà Tĩnh.",
       "child_nav_id": "1",
       "categoryId": 1,
       "isFeatured": "1",
       "views": 0,
-      "type": "dich-vu",
+      "type": "san-xuat",
       "price": 0,
       "discountPrice": 0,
       "images": [
-        "/images/uploads/1747470218997-502556754.jpg"
+        "/images/uploads/123456789.jpg"
       ],
       "image": "/images/uploads/1747381664973-82971372.jpg",
       "createdAt": "2025-05-16T07:47:44.993Z",
@@ -356,7 +356,7 @@
       "categoryId": 2,
       "isFeatured": "1",
       "views": 0,
-      "type": "dich-vu",
+      "type": "san-xuat",
       "price": 0,
       "discountPrice": 0,
       "images": [
@@ -379,7 +379,7 @@
       "categoryId": 3,
       "isFeatured": "1",
       "views": 0,
-      "type": "dich-vu",
+      "type": "san-xuat",
       "price": 0,
       "discountPrice": 0,
       "images": [
@@ -529,8 +529,8 @@
       "id": 1,
       "name": "Nguyễn Hữu Quyền",
       "position": "Giám đốc HTX",
-      "avatar": "/images/teams/gd.jpg",
-      "image": "/images/teams/gd.jpg",
+      "avatar": "/images/uploads/director.jpg",
+      "image": "/images/uploads/director.jpg",
       "description": "Ông Nguyễn Hữu Quyền có hơn 15 năm kinh nghiệm trong lĩnh vực nông nghiệp và du lịch sinh thái.",
       "createdAt": "2022-01-01T00:00:00.000Z",
       "updatedAt": "2022-01-01T00:00:00.000Z"
@@ -539,8 +539,8 @@
       "id": 2,
       "name": "Võ Tá Quỳnh",
       "position": "Quản Lý Thôn Trang Liên Nhật",
-      "avatar": "/images/teams/quynh.jpg",
-      "image": "/images/teams/quynh.jpg",
+      "avatar": "/images/uploads/manager.jpg",
+      "image": "/images/uploads/manager.jpg",
       "description": "Ông Võ Tá Quỳnh chuyên về phát triển sản phẩm và marketing cho các sản phẩm nông nghiệp và du lịch.",
       "createdAt": "2022-01-01T00:00:00.000Z",
       "updatedAt": "2022-01-01T00:00:00.000Z"
@@ -566,6 +566,27 @@
       "url": "https://www.youtube.com/shorts/KiJRPnynuVQ",
       "name": "Trải Nghiệm Ẩm Thực Thôn Trang Liên Nhật",
       "description": "Thưởng thức các món ăn đặc sản tại nhà hàng trên đầm sen của Thôn Trang Liên Nhật.",
+      "createdAt": "2024-04-25T00:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "url": "https://www.youtube.com/watch?v=SElNZQ22Itc",
+      "name": "Khu Dân Cư Kiểu Mẫu Liên Nhật",
+      "description": "Khu dân cư kiểu mẫu Liên Nhật là một khu dân cư được xây dựng theo mô hình kiểu mẫu của Thôn Trang Liên Nhật.",
+      "createdAt": "2024-04-25T00:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "url": "https://www.youtube.com/watch?v=gzWx-3Cys20",
+      "name": "Khu Sinh Thái Mới Liên Nhật",
+      "description": "Khu sinh thái mới Liên Nhật là một khu sinh thái được xây dựng theo mô hình sinh thái mới của Thôn Trang Liên Nhật.",
+      "createdAt": "2024-04-25T00:00:00.000Z"
+    },
+    {
+      "id": 6,
+      "url": "https://www.youtube.com/shorts/y9T2xkHUt5Q",
+      "name": "Khu Sinh Thái Mới Liên Nhật",
+      "description": "Khu sinh thái mới Liên Nhật là một khu sinh thái được xây dựng theo mô hình sinh thái mới của Thôn Trang Liên Nhật.",
       "createdAt": "2024-04-25T00:00:00.000Z"
     }
   ],

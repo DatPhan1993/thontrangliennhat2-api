@@ -5,10 +5,8 @@ const path = require('path');
 module.exports = (req, res) => {
   // Set CORS headers for requests based on origin
   const allowedOrigins = [
-    'https://thontrangliennhat.com',
-    'http://thontrangliennhat.com',
     'http://localhost:3000',
-    'http://localhost:3001'
+    'http://127.0.0.1:3000'
   ];
   
   const origin = req.headers.origin;
@@ -16,7 +14,7 @@ module.exports = (req, res) => {
   if (allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
   } else {
-    res.setHeader('Access-Control-Allow-Origin', 'https://thontrangliennhat.com');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   }
   
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -31,7 +29,7 @@ module.exports = (req, res) => {
   }
 
   // Set CORS headers for all requests
-  res.setHeader('Access-Control-Allow-Origin', 'https://thontrangliennhat.com');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
