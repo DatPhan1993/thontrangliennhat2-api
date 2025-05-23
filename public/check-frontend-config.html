@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Frontend Config - Thôn Trang Liên Nhất</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        .diagnostic {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .status { padding: 10px; border-radius: 4px; margin: 10px 0; }
+        .status.success { background: #d4edda; color: #155724; }
+        .status.error { background: #f8d7da; color: #721c24; }
+        .status.warning { background: #fff3cd; color: #856404; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Frontend Configuration Diagnostic</h1>
+    
+    <div class="diagnostic">
+        <h2>🎯 Mission: Identify Image Loading Issues</h2>
+        <p>This tool will help diagnose why images aren't loading on the main website.</p>
+        
+        <button class="btn" onclick="checkEnvironment()">Check Environment</button>
+        <button class="btn" onclick="checkAPIConfig()">Check API Config</button>
+        <button class="btn" onclick="checkFetchRequests()">Monitor Fetch</button>
+        <button class="btn" onclick="checkImages()">Check Images</button>
+        <button class="btn" onclick="injectFix()">Inject Fix</button>
+        
+        <div id="results"></div>
+    </div>
+
+    <div class="diagnostic">
+        <h2>📋 Copy & Paste into Browser Console</h2>
+        <p>Copy this code and paste it into the browser console on <code>thontrangliennhat.com</code>:</p>
+        
+        <div class="code-block" id="consoleCode"></div>
+        
+        <button class="btn" onclick="copyToClipboard('consoleCode')">Copy Console Code</button>
+    </div>
+
+    <div class="diagnostic">
+        <h2>🛠️ Manual Fix Script</h2>
+        <p>If automatic detection fails, use this manual fix:</p>
+        
+        <div class="code-block" id="manualFix"></div>
+        
+        <button class="btn" onclick="copyToClipboard('manualFix')">Copy Manual Fix</button>
+    </div>
+
+    <script>
+        // Initialize console and manual fix code
+        document.addEventListener('DOMContentLoaded', () => {
+            generateConsoleCode();
+            generateManualFix();
+        });
+
+        function addResult(title, content, type = 'info') {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.innerHTML = `
+                <h3>${title}</h3>
+                <div class="status ${type}">${content}</div>
+            `;
+            results.appendChild(div);
+        }
+
+        function checkEnvironment() {
+            addResult('🌍 Environment Check', `
+                <strong>Current URL:</strong> ${window.location.href}<br>
+                <strong>Protocol:</strong> ${window.location.protocol}<br>
+                <strong>Host:</strong> ${window.location.host}<br>
+                <strong>User Agent:</strong> ${navigator.userAgent}<br>
+                <strong>Local Storage Available:</strong> ${typeof Storage !== "undefined"}<br>
+                <strong>Service Worker Available:</strong> ${'serviceWorker' in navigator}
+            `, 'success');
+        }
+
+        function checkAPIConfig() {
+            // Try to detect API configuration in current page
+            const scripts = Array.from(document.scripts);
+            let apiConfig = 'Not found';
+            
+            // Look for common patterns
+            const pageContent = document.documentElement.outerHTML;
+            
+            if (pageContent.includes('localhost:3001')) {
+                apiConfig = '❌ Found localhost:3001 references in page content';
+            } else if (pageContent.includes('api.thontrangliennhat.com')) {
+                apiConfig = '✅ Found api.thontrangliennhat.com references';
+            } else {
+                apiConfig = '⚠️ No API references detected in page content';
+            }
+
+            addResult('⚙️ API Configuration', apiConfig, 
+                apiConfig.includes('❌') ? 'error' : 
+                apiConfig.includes('✅') ? 'success' : 'warning'
+            );
+        }
+
+        function checkFetchRequests() {
+            // Override fetch to monitor requests
+            const originalFetch = window.fetch;
+            const interceptedRequests = [];
+            
+            window.fetch = function(...args) {
+                const url = args[0];
+                interceptedRequests.push({
+                    url: url,
+                    timestamp: new Date().toISOString(),
+                    isLocalhost: typeof url === 'string' && url.includes('localhost:3001')
+                });
+                
+                return originalFetch.apply(this, args);
+            };
+
+            addResult('📡 Fetch Monitor', `
+                Fetch interceptor installed. Make a request and check console for details.<br>
+                <strong>Intercepted requests will be logged to console.</strong>
+            `, 'success');
+
+            // Log intercepted requests to console
+            setInterval(() => {
+                if (interceptedRequests.length > 0) {
+                    console.group('🕵️ Intercepted Fetch Requests');
+                    interceptedRequests.forEach(req => {
+                        console.log(`${req.isLocalhost ? '❌' : '✅'} ${req.url} (${req.timestamp})`);
+                    });
+                    console.groupEnd();
+                    interceptedRequests.length = 0; // Clear array
+                }
+            }, 2000);
+        }
+
+        function checkImages() {
+            const images = document.querySelectorAll('img');
+            let localhostCount = 0;
+            let productionCount = 0;
+            let brokenCount = 0;
+
+            images.forEach(img => {
+                if (img.src.includes('localhost:3001')) {
+                    localhostCount++;
+                    console.log('❌ Localhost image:', img.src);
+                } else if (img.src.includes('api.thontrangliennhat.com')) {
+                    productionCount++;
+                } else if (img.src.includes('data:') || img.src.includes('blob:')) {
+                    // Skip data/blob URLs
+                } else {
+                    brokenCount++;
+                }
+            });
+
+            addResult('🖼️ Image Analysis', `
+                <strong>Total images:</strong> ${images.length}<br>
+                <strong>❌ Localhost references:</strong> ${localhostCount}<br>
+                <strong>✅ Production API:</strong> ${productionCount}<br>
+                <strong>⚠️ Other/Broken:</strong> ${brokenCount}<br>
+                ${localhostCount > 0 ? '<br><strong>🔧 Fix needed: Replace localhost URLs</strong>' : ''}
+            `, localhostCount > 0 ? 'error' : 'success');
+        }
+
+        function injectFix() {
+            // Inject the fix script directly
+            const fixScript = `
+                (function() {
+                    console.log('🔧 Injecting image URL fix...');
+                    
+                    // Fix existing images
+                    document.querySelectorAll('img').forEach(img => {
+                        if (img.src.includes('localhost:3001')) {
+                            const oldSrc = img.src;
+                            img.src = img.src.replace('http://localhost:3001', 'https://api.thontrangliennhat.com');
+                            console.log('✅ Fixed image:', oldSrc, '->', img.src);
+                        }
+                    });
+                    
+                    // Override Image constructor
+                    const OriginalImage = window.Image;
+                    window.Image = function() {
+                        const img = new OriginalImage();
+                        const originalSrcSetter = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src').set;
+                        
+                        Object.defineProperty(img, 'src', {
+                            set: function(value) {
+                                if (typeof value === 'string' && value.includes('localhost:3001')) {
+                                    value = value.replace('http://localhost:3001', 'https://api.thontrangliennhat.com');
+                                    console.log('✅ Fixed new image URL:', value);
+                                }
+                                originalSrcSetter.call(this, value);
+                            },
+                            get: function() {
+                                return this.getAttribute('src');
+                            }
+                        });
+                        
+                        return img;
+                    };
+                    
+                    // Override fetch
+                    const originalFetch = window.fetch;
+                    window.fetch = function(input, init) {
+                        if (typeof input === 'string' && input.includes('localhost:3001')) {
+                            input = input.replace('http://localhost:3001', 'https://api.thontrangliennhat.com');
+                            console.log('✅ Fixed fetch URL:', input);
+                        }
+                        return originalFetch.call(this, input, init);
+                    };
+                    
+                    console.log('✅ Fix injection completed');
+                })();
+            `;
+
+            // Execute the fix
+            eval(fixScript);
+            
+            addResult('🚀 Fix Injected', 'Image URL fix has been injected. Check console for details and try loading images again.', 'success');
+        }
+
+        function generateConsoleCode() {
+            const consoleCode = `
+// 🔍 Thôn Trang Liên Nhất - Image Fix Diagnostic
+// Copy and paste this entire block into the browser console on thontrangliennhat.com
+
+(function() {
+    console.log('🚀 Starting diagnostic...');
+    
+    // 1. Check current environment
+    console.group('🌍 Environment Check');
+    console.log('URL:', window.location.href);
+    console.log('Protocol:', window.location.protocol);
+    console.log('Host:', window.location.host);
+    console.groupEnd();
+    
+    // 2. Check for localhost references
+    console.group('🔍 Localhost Reference Check');
+    const pageContent = document.documentElement.outerHTML;
+    const hasLocalhost = pageContent.includes('localhost:3001');
+    console.log('Page contains localhost:3001:', hasLocalhost);
+    
+    if (hasLocalhost) {
+        console.warn('❌ Found localhost references in page');
+        console.log('This indicates the frontend is still configured for local development');
+    } else {
+        console.log('✅ No localhost references found in page content');
+    }
+    console.groupEnd();
+    
+    // 3. Check images
+    console.group('🖼️ Image Analysis');
+    const images = document.querySelectorAll('img');
+    let localhostImages = [];
+    
+    images.forEach((img, index) => {
+        if (img.src.includes('localhost:3001')) {
+            localhostImages.push({index, src: img.src, element: img});
+            console.log(\`❌ Image \${index}: \${img.src}\`);
+        }
+    });
+    
+    console.log(\`Total images: \${images.length}\`);
+    console.log(\`Localhost images: \${localhostImages.length}\`);
+    console.groupEnd();
+    
+    // 4. Apply fix if needed
+    if (localhostImages.length > 0) {
+        console.group('🔧 Applying Fix');
+        
+        localhostImages.forEach(imgData => {
+            const oldSrc = imgData.src;
+            const newSrc = oldSrc.replace('http://localhost:3001', 'https://api.thontrangliennhat.com');
+            imgData.element.src = newSrc;
+            console.log(\`✅ Fixed: \${oldSrc} -> \${newSrc}\`);
+        });
+        
+        // Install fetch interceptor for future requests
+        const originalFetch = window.fetch;
+        window.fetch = function(input, init) {
+            if (typeof input === 'string' && input.includes('localhost:3001')) {
+                input = input.replace('http://localhost:3001', 'https://api.thontrangliennhat.com');
+                console.log('✅ Fixed fetch URL:', input);
+            }
+            return originalFetch.call(this, input, init);
+        };
+        
+        console.log('✅ Fix applied and fetch interceptor installed');
+        console.groupEnd();
+        
+        // Suggest permanent fix
+        console.group('💡 Permanent Fix Suggestions');
+        console.log('1. Update frontend build configuration to use production API URL');
+        console.log('2. Clear browser cache and service worker cache');
+        console.log('3. Check environment variables in frontend build process');
+        console.log('4. Verify API_BASE_URL is set to production value');
+        console.groupEnd();
+        
+    } else {
+        console.log('✅ No localhost images found - images should be working correctly');
+    }
+    
+    console.log('🏁 Diagnostic completed');
+})();
+            `.trim();
+
+            document.getElementById('consoleCode').textContent = consoleCode;
+        }
+
+        function generateManualFix() {
+            const manualFix = `
+// 🛠️ Manual Fix for Image Loading Issues
+// Use this if the automatic diagnostic doesn't work
+
+// Step 1: Fix all existing images immediately
+document.querySelectorAll('img').forEach(img => {
+    if (img.src.includes('localhost:3001')) {
+        img.src = img.src.replace('http://localhost:3001', 'https://api.thontrangliennhat.com');
+        img.onload = () => console.log('✅ Image fixed and loaded:', img.src);
+        img.onerror = () => console.error('❌ Image failed to load:', img.src);
+    }
+});
+
+// Step 2: Clear all caches
+(async function clearCaches() {
+    try {
+        // Clear service worker caches
+        if ('caches' in window) {
+            const cacheNames = await caches.keys();
+            await Promise.all(cacheNames.map(name => caches.delete(name)));
+            console.log('✅ Service worker caches cleared');
+        }
+        
+        // Clear localStorage and sessionStorage
+        localStorage.clear();
+        sessionStorage.clear();
+        console.log('✅ Local storage cleared');
+        
+    } catch (error) {
+        console.error('❌ Cache clear error:', error);
+    }
+})();
+
+// Step 3: Force reload the problematic components
+// Trigger a re-render of React components that show products
+if (window.React) {
+    console.log('🔄 React detected - try triggering a state update');
+    
+    // You may need to manually trigger a component re-render
+    // This depends on your specific React setup
+}
+
+// Step 4: Test API connectivity
+fetch('https://api.thontrangliennhat.com/api/products')
+    .then(response => response.json())
+    .then(data => {
+        console.log('✅ API connection successful');
+        console.log('📊 Products loaded:', data.data?.length || 0);
+        
+        if (data.data?.[0]?.images?.[0]) {
+            console.log('🖼️ Sample image URL:', data.data[0].images[0]);
+            
+            // Test loading the first image
+            const testImg = new Image();
+            testImg.onload = () => console.log('✅ Sample image loads successfully');
+            testImg.onerror = () => console.error('❌ Sample image failed to load');
+            testImg.src = data.data[0].images[0].startsWith('/') 
+                ? \`https://api.thontrangliennhat.com\${data.data[0].images[0]}\`
+                : data.data[0].images[0];
+        }
+    })
+    .catch(error => {
+        console.error('❌ API connection failed:', error);
+    });
+
+console.log('🏁 Manual fix completed. Check console for results.');
+            `.trim();
+
+            document.getElementById('manualFix').textContent = manualFix;
+        }
+
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            const text = element.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ Copied to clipboard! Paste it into the browser console on thontrangliennhat.com');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                
+                // Fallback: select text
+                const range = document.createRange();
+                range.selectNode(element);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                
+                try {
+                    document.execCommand('copy');
+                    alert('✅ Text selected! Press Ctrl+C (or Cmd+C) to copy.');
+                } catch (err) {
+                    alert('❌ Copy failed. Please manually select and copy the text.');
+                }
+            });
+        }
+    </script>
+</body>
+</html> 
