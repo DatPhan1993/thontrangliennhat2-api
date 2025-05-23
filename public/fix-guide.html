@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔧 Fix Cache & URLs - Thôn Trang Liên Nhật</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6; 
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            background: white; 
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #ff6b6b, #ffa726);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .header p { font-size: 1.2em; opacity: 0.9; }
+        .content { padding: 40px 30px; }
+        .step {
+            background: #f8f9fa;
+            border-left: 5px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        .step h3 { color: #28a745; margin-bottom: 10px; }
+        .button {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin: 10px 5px;
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+        .button:hover { transform: translateY(-2px); }
+        .button.danger { 
+            background: linear-gradient(135deg, #dc3545, #e74c3c);
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+        }
+        .button.info { 
+            background: linear-gradient(135deg, #007bff, #6f42c1);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+        .result {
+            background: #e8f5e8;
+            border: 1px solid #28a745;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            white-space: pre-wrap;
+            font-family: monospace;
+            display: none;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .success { background: #d4edda; border-color: #28a745; color: #155724; }
+        .error { background: #f8d7da; border-color: #dc3545; color: #721c24; }
+        code {
+            background: #f1f3f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        .tab-buttons {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+            margin: 20px 0 0 0;
+        }
+        .tab-button {
+            flex: 1;
+            padding: 15px;
+            background: #e9ecef;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .tab-button.active { background: #007bff; color: white; }
+        .tab-content {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 0 0 10px 10px;
+            display: none;
+        }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔧 Fix Cache & URLs</h1>
+            <p>Công cụ sửa lỗi cache và localhost URLs cho website Thôn Trang Liên Nhật</p>
+        </div>
+        
+        <div class="content">
+            <div class="warning">
+                <strong>⚠️ Lưu ý:</strong> Nếu website vẫn hiển thị hình ảnh từ localhost:3001, 
+                hãy sử dụng các công cụ bên dưới để fix.
+            </div>
+
+            <div class="step">
+                <h3>🚀 Quick Fix (Khuyến nghị)</h3>
+                <p>Chạy script tự động sửa tất cả vấn đề về cache và URLs:</p>
+                <button class="button" onclick="runQuickFix()">
+                    🚀 Chạy Quick Fix
+                </button>
+                <button class="button info" onclick="checkStatus()">
+                    📊 Kiểm tra tình trạng
+                </button>
+            </div>
+
+            <div class="step">
+                <h3>🧹 Clear Cache</h3>
+                <p>Xóa toàn bộ cache của browser:</p>
+                <button class="button danger" onclick="clearAllCache()">
+                    🗑️ Clear All Cache
+                </button>
+                <button class="button danger" onclick="hardRefresh()">
+                    🔄 Hard Refresh Page
+                </button>
+            </div>
+
+            <div class="step">
+                <h3>🖼️ Fix Images</h3>
+                <p>Sửa URLs của hình ảnh từ localhost thành production:</p>
+                <button class="button" onclick="fixImages()">
+                    🖼️ Fix Image URLs
+                </button>
+                <button class="button info" onclick="testImageUrls()">
+                    🧪 Test Image URLs
+                </button>
+            </div>
+
+            <div class="tab-buttons">
+                <button class="tab-button active" onclick="showTab('manual')">Hướng dẫn Manual</button>
+                <button class="tab-button" onclick="showTab('script')">Browser Console</button>
+                <button class="tab-button" onclick="showTab('frontend')">Frontend Code</button>
+            </div>
+
+            <div class="tab-content active" id="manual">
+                <h3>🛠️ Hướng dẫn Manual Fix</h3>
+                <ol>
+                    <li><strong>Clear Browser Cache:</strong>
+                        <ul>
+                            <li>Chrome: Ctrl+Shift+Del → All time → Clear data</li>
+                            <li>Firefox: Ctrl+Shift+Del → Everything → Clear Now</li>
+                            <li>Safari: Develop → Empty Caches</li>
+                        </ul>
+                    </li>
+                    <li><strong>Hard Refresh:</strong> Ctrl+Shift+R hoặc Shift+F5</li>
+                    <li><strong>Incognito Mode:</strong> Test website trong chế độ ẩn danh</li>
+                    <li><strong>Dev Tools:</strong> F12 → Application → Clear Storage</li>
+                </ol>
+            </div>
+
+            <div class="tab-content" id="script">
+                <h3>💻 Browser Console Commands</h3>
+                <p>Copy và paste vào Console (F12):</p>
+                <code>
+// Clear tất cả cache
+caches.keys().then(names => names.forEach(name => caches.delete(name)));
+localStorage.clear();
+sessionStorage.clear();
+
+// Fix image URLs
+document.querySelectorAll('img').forEach(img => {
+  if (img.src.includes('localhost:3001')) {
+    img.src = img.src.replace('http://localhost:3001', 'https://api.thontrangliennhat.com');
+  }
+});
+                </code>
+            </div>
+
+            <div class="tab-content" id="frontend">
+                <h3>⚙️ Frontend Code Fix</h3>
+                <p>Thêm vào HTML của website:</p>
+                <code>
+&lt;script src="https://api.thontrangliennhat.com/fix-cache.js"&gt;&lt;/script&gt;
+                </code>
+                <p>Hoặc check environment variables:</p>
+                <code>
+const API_BASE = process.env.NODE_ENV === 'production' 
+  ? 'https://api.thontrangliennhat.com'
+  : 'http://localhost:3001';
+                </code>
+            </div>
+
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        function showResult(message, type = 'success') {
+            const result = document.getElementById('result');
+            result.className = `result ${type}`;
+            result.textContent = message;
+            result.style.display = 'block';
+            
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                result.style.display = 'none';
+            }, 5000);
+        }
+
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        async function runQuickFix() {
+            try {
+                showResult('🚀 Đang chạy Quick Fix...', 'info');
+                
+                // Load and run the fix script
+                const script = document.createElement('script');
+                script.src = 'https://api.thontrangliennhat.com/fix-cache.js?' + Date.now();
+                script.onload = () => {
+                    showResult('✅ Quick Fix hoàn thành! Trang sẽ reload sau 3 giây...', 'success');
+                    setTimeout(() => window.location.reload(true), 3000);
+                };
+                script.onerror = () => {
+                    showResult('❌ Không thể load fix script. Thử refresh page.', 'error');
+                };
+                document.head.appendChild(script);
+                
+            } catch (error) {
+                showResult('❌ Lỗi: ' + error.message, 'error');
+            }
+        }
+
+        async function clearAllCache() {
+            try {
+                showResult('🧹 Đang clear cache...', 'info');
+                
+                let cleared = 0;
+                
+                // Clear Cache API
+                if ('caches' in window) {
+                    const cacheNames = await caches.keys();
+                    await Promise.all(cacheNames.map(name => caches.delete(name)));
+                    cleared += cacheNames.length;
+                }
+                
+                // Clear storage
+                localStorage.clear();
+                sessionStorage.clear();
+                
+                // Clear service workers
+                if ('serviceWorker' in navigator) {
+                    const registrations = await navigator.serviceWorker.getRegistrations();
+                    for (let registration of registrations) {
+                        await registration.unregister();
+                    }
+                    cleared += registrations.length;
+                }
+                
+                showResult(`✅ Đã clear ${cleared} cache items. Trang sẽ reload...`, 'success');
+                setTimeout(() => window.location.reload(true), 2000);
+                
+            } catch (error) {
+                showResult('❌ Lỗi clear cache: ' + error.message, 'error');
+            }
+        }
+
+        function hardRefresh() {
+            showResult('🔄 Đang hard refresh...', 'info');
+            setTimeout(() => window.location.reload(true), 1000);
+        }
+
+        function fixImages() {
+            try {
+                let fixedCount = 0;
+                
+                document.querySelectorAll('img').forEach(img => {
+                    if (img.src.includes('localhost:3001')) {
+                        img.src = img.src.replace('http://localhost:3001', 'https://api.thontrangliennhat.com');
+                        fixedCount++;
+                    }
+                });
+                
+                showResult(`✅ Đã fix ${fixedCount} hình ảnh`, 'success');
+                
+            } catch (error) {
+                showResult('❌ Lỗi fix images: ' + error.message, 'error');
+            }
+        }
+
+        async function checkStatus() {
+            try {
+                showResult('📊 Đang kiểm tra...', 'info');
+                
+                // Check API
+                const apiResponse = await fetch('https://api.thontrangliennhat.com/api/health');
+                const apiData = await apiResponse.json();
+                
+                // Check localhost images
+                const localhostImages = document.querySelectorAll('img[src*="localhost"]').length;
+                
+                // Check cache
+                let cacheCount = 0;
+                if ('caches' in window) {
+                    const cacheNames = await caches.keys();
+                    cacheCount = cacheNames.length;
+                }
+                
+                const status = `
+📊 Tình trạng hiện tại:
+• API Status: ${apiData.message} ✅
+• Localhost images: ${localhostImages} ${localhostImages > 0 ? '⚠️' : '✅'}
+• Cache entries: ${cacheCount}
+• LocalStorage: ${localStorage.length} items
+• SessionStorage: ${sessionStorage.length} items
+• Service Workers: ${navigator.serviceWorker ? (await navigator.serviceWorker.getRegistrations()).length : 0}
+                `;
+                
+                showResult(status, localhostImages > 0 ? 'warning' : 'success');
+                
+            } catch (error) {
+                showResult('❌ Lỗi check status: ' + error.message, 'error');
+            }
+        }
+
+        async function testImageUrls() {
+            try {
+                showResult('🧪 Đang test image URLs...', 'info');
+                
+                const response = await fetch('https://api.thontrangliennhat.com/api/debug/urls');
+                const data = await response.json();
+                
+                const result = `
+🧪 Kết quả test:
+• Localhost URLs trong database: ${data.data.localhostUrlsFound}
+• API working: ✅
+• Test time: ${new Date().toLocaleString()}
+                `;
+                
+                showResult(result, data.data.localhostUrlsFound > 0 ? 'warning' : 'success');
+                
+            } catch (error) {
+                showResult('❌ Lỗi test: ' + error.message, 'error');
+            }
+        }
+
+        // Auto check status on page load
+        window.onload = () => {
+            setTimeout(checkStatus, 1000);
+        };
+    </script>
+</body>
+</html> 
