@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test - Thôn Trang Liên Nhật</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 20px; border-radius: 10px; }
+        .button { padding: 10px 20px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .button:hover { background: #0056b3; }
+        .result { margin: 10px 0; padding: 15px; background: #f8f9fa; border-left: 4px solid #007bff; }
+        .error { border-left-color: #dc3545; background: #f8d7da; }
+        .success { border-left-color: #28a745; background: #d4edda; }
+        .image-test { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+        .image-item { border: 1px solid #ddd; padding: 10px; border-radius: 5px; }
+        .image-item img { max-width: 200px; max-height: 150px; }
+        pre { background: #f1f1f1; padding: 10px; overflow-x: auto; border-radius: 5px; font-size: 12px; }
+        .clear-cache { background: #dc3545; }
+        .clear-cache:hover { background: #c82333; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 API Test - Thôn Trang Liên Nhật</h1>
+        <p>Công cụ test API và debug cache issues</p>
+        
+        <div class="controls">
+            <button class="button clear-cache" onclick="clearAllCache()">🗑️ Clear All Cache</button>
+            <button class="button" onclick="testDebugEndpoint()">🔍 Debug URLs</button>
+            <button class="button" onclick="testAllEndpoints()">🚀 Test All APIs</button>
+            <button class="button" onclick="testImageUrls()">🖼️ Test Images</button>
+        </div>
+
+        <div id="results"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'https://api.thontrangliennhat.com';
+        
+        function addResult(title, content, type = 'result') {
+            const results = document.getElementById('results');
+            const div = document.createElement('div');
+            div.className = `result ${type}`;
+            div.innerHTML = `<h3>${title}</h3><div>${content}</div>`;
+            results.appendChild(div);
+            // Auto scroll to result
+            div.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function clearAllCache() {
+            try {
+                // Clear browser cache
+                if ('caches' in window) {
+                    const cacheNames = await caches.keys();
+                    await Promise.all(cacheNames.map(name => caches.delete(name)));
+                }
+                
+                // Clear localStorage
+                localStorage.clear();
+                
+                // Clear sessionStorage
+                sessionStorage.clear();
+                
+                // Force reload
+                addResult('✅ Cache Cleared', 'All cache cleared. Page will reload in 2 seconds...', 'success');
+                setTimeout(() => window.location.reload(true), 2000);
+            } catch (error) {
+                addResult('❌ Cache Clear Error', error.message, 'error');
+            }
+        }
+
+        async function testDebugEndpoint() {
+            try {
+                const response = await fetch(`${API_BASE}/api/debug/urls?_=${Date.now()}`, {
+                    cache: 'no-cache'
+                });
+                const data = await response.json();
+                
+                let content = `<strong>Localhost URLs found:</strong> ${data.data.localhostUrlsFound}<br>`;
+                content += `<strong>Timestamp:</strong> ${data.data.timestamp}<br>`;
+                
+                if (data.data.localhostUrls.length > 0) {
+                    content += '<strong>Problematic URLs:</strong><pre>' + JSON.stringify(data.data.localhostUrls, null, 2) + '</pre>';
+                    addResult('⚠️ Debug Results', content, 'error');
+                } else {
+                    content += '<strong>✅ No localhost URLs found in database!</strong>';
+                    addResult('✅ Debug Results', content, 'success');
+                }
+            } catch (error) {
+                addResult('❌ Debug Error', error.message, 'error');
+            }
+        }
+
+        async function testAllEndpoints() {
+            const endpoints = [
+                '/api/health',
+                '/api/products', 
+                '/api/services',
+                '/api/news',
+                '/api/images',
+                '/api/videos',
+                '/api/teams'
+            ];
+
+            for (const endpoint of endpoints) {
+                try {
+                    const response = await fetch(`${API_BASE}${endpoint}?_=${Date.now()}`, {
+                        cache: 'no-cache'
+                    });
+                    const data = await response.json();
+                    
+                    let content = `<strong>Status:</strong> ${response.status}<br>`;
+                    content += `<strong>Response:</strong> ${data.message}<br>`;
+                    content += `<strong>Data count:</strong> ${data.data ? (Array.isArray(data.data) ? data.data.length : 'object') : 'none'}<br>`;
+                    
+                    addResult(`✅ ${endpoint}`, content, 'success');
+                } catch (error) {
+                    addResult(`❌ ${endpoint}`, error.message, 'error');
+                }
+            }
+        }
+
+        async function testImageUrls() {
+            try {
+                const response = await fetch(`${API_BASE}/api/images?_=${Date.now()}`, {
+                    cache: 'no-cache'
+                });
+                const data = await response.json();
+                
+                if (data.data && data.data.length > 0) {
+                    let content = `<div class="image-test">`;
+                    
+                    for (const image of data.data.slice(0, 5)) { // Test first 5 images
+                        content += `
+                            <div class="image-item">
+                                <strong>ID:</strong> ${image.id}<br>
+                                <strong>URL:</strong> <a href="${image.url}" target="_blank">${image.url}</a><br>
+                                <img src="${image.url}" onerror="this.style.border='3px solid red'" onload="this.style.border='3px solid green'" />
+                            </div>
+                        `;
+                    }
+                    content += `</div>`;
+                    
+                    addResult('🖼️ Image URLs Test', content, 'result');
+                } else {
+                    addResult('🖼️ Image URLs Test', 'No images found', 'error');
+                }
+            } catch (error) {
+                addResult('❌ Image Test Error', error.message, 'error');
+            }
+        }
+
+        // Auto-run debug check on page load
+        window.onload = () => {
+            testDebugEndpoint();
+        };
+    </script>
+</body>
+</html> 
