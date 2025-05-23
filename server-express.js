@@ -180,15 +180,15 @@ app.get('/favicon.png', (req, res) => {
 
 // Create videos directory if it doesn't exist (only in non-serverless environments)
 if (!process.env.VERCEL) {
-const VIDEOS_DIR = path.join(__dirname, 'videos');
-if (!fs.existsSync(VIDEOS_DIR)) {
+  const VIDEOS_DIR = path.join(__dirname, 'videos');
+  if (!fs.existsSync(VIDEOS_DIR)) {
     try {
-  console.log(`Creating videos directory: ${VIDEOS_DIR}`);
-  fs.mkdirSync(VIDEOS_DIR, { recursive: true });
+      console.log(`Creating videos directory: ${VIDEOS_DIR}`);
+      fs.mkdirSync(VIDEOS_DIR, { recursive: true });
     } catch (err) {
       console.warn('Could not create videos directory:', err.message);
     }
-}
+  }
 
   // Create fonts directory if it doesn't exist (only in non-serverless environments)
   const FONTS_DIR = path.join(__dirname, 'public', 'fonts');
@@ -202,12 +202,12 @@ if (!fs.existsSync(VIDEOS_DIR)) {
   }
 
   // Create an empty placeholder video if it doesn't exist (only in non-serverless environments)
-const placeholderVideo = path.join(VIDEOS_DIR, 'placeholder.mp4');
-if (!fs.existsSync(placeholderVideo)) {
-  try {
-    fs.writeFileSync(placeholderVideo, '');
-    console.log('Created placeholder video file');
-  } catch (err) {
+  const placeholderVideo = path.join(VIDEOS_DIR, 'placeholder.mp4');
+  if (!fs.existsSync(placeholderVideo)) {
+    try {
+      fs.writeFileSync(placeholderVideo, '');
+      console.log('Created placeholder video file');
+    } catch (err) {
       console.warn('Could not create placeholder video:', err.message);
     }
   }
@@ -761,11 +761,15 @@ app.get('/api/categories/for-:type/falling-back-to-database.json', (req, res) =>
 // Database path
 const DB_PATH = path.join(__dirname, 'api/database.json');
 
-// Define upload directory and ensure it exists
+// Define upload directory and ensure it exists (only in non-serverless environments)
 const UPLOADS_DIR = path.join(__dirname, 'images', 'uploads');
-if (!fs.existsSync(UPLOADS_DIR)) {
-  console.log(`Creating uploads directory: ${UPLOADS_DIR}`);
-  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+if (!process.env.VERCEL && !fs.existsSync(UPLOADS_DIR)) {
+  try {
+    console.log(`Creating uploads directory: ${UPLOADS_DIR}`);
+    fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+  } catch (err) {
+    console.warn('Could not create uploads directory:', err.message);
+  }
 }
 
 // Configure multer for file uploads
@@ -805,7 +809,12 @@ app.post('/api/upload/image', upload.single('image'), (req, res) => {
     }
     
     const fileUrlPath = `/images/uploads/${req.file.filename}`;
-    const absoluteUrlPath = `http://localhost:${PORT}${fileUrlPath}`;
+    
+    // Use production URL or localhost based on environment
+    const baseUrl = process.env.NODE_ENV === 'production' 
+      ? 'https://api.thontrangliennhat.com'
+      : `http://localhost:${PORT}`;
+    const absoluteUrlPath = `${baseUrl}${fileUrlPath}`;
     
     res.json({
       statusCode: 200,
