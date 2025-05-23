@@ -180,15 +180,15 @@ app.get('/favicon.png', (req, res) => {
 
 // Create videos directory if it doesn't exist (only in non-serverless environments)
 if (!process.env.VERCEL) {
-  const VIDEOS_DIR = path.join(__dirname, 'videos');
-  if (!fs.existsSync(VIDEOS_DIR)) {
+const VIDEOS_DIR = path.join(__dirname, 'videos');
+if (!fs.existsSync(VIDEOS_DIR)) {
     try {
-      console.log(`Creating videos directory: ${VIDEOS_DIR}`);
-      fs.mkdirSync(VIDEOS_DIR, { recursive: true });
+  console.log(`Creating videos directory: ${VIDEOS_DIR}`);
+  fs.mkdirSync(VIDEOS_DIR, { recursive: true });
     } catch (err) {
       console.warn('Could not create videos directory:', err.message);
     }
-  }
+}
 
   // Create fonts directory if it doesn't exist (only in non-serverless environments)
   const FONTS_DIR = path.join(__dirname, 'public', 'fonts');
@@ -202,12 +202,12 @@ if (!process.env.VERCEL) {
   }
 
   // Create an empty placeholder video if it doesn't exist (only in non-serverless environments)
-  const placeholderVideo = path.join(VIDEOS_DIR, 'placeholder.mp4');
-  if (!fs.existsSync(placeholderVideo)) {
-    try {
-      fs.writeFileSync(placeholderVideo, '');
-      console.log('Created placeholder video file');
-    } catch (err) {
+const placeholderVideo = path.join(VIDEOS_DIR, 'placeholder.mp4');
+if (!fs.existsSync(placeholderVideo)) {
+  try {
+    fs.writeFileSync(placeholderVideo, '');
+    console.log('Created placeholder video file');
+  } catch (err) {
       console.warn('Could not create placeholder video:', err.message);
     }
   }
@@ -332,12 +332,12 @@ app.get('/api/health', (req, res) => {
 // Products routes
 app.get('/api/products', (req, res) => {
   try {
-    const db = getDatabase();
-    res.json({ 
-      statusCode: 200,
-      message: 'Success', 
-      data: db.products || [] 
-    });
+  const db = getDatabase();
+  res.json({ 
+    statusCode: 200,
+    message: 'Success', 
+    data: db.products || [] 
+  });
   } catch (error) {
     console.error('Products API error:', error);
     res.status(500).json({
@@ -360,6 +360,12 @@ app.get('/api/san-pham', (req, res) => {
 // News routes
 app.get('/api/news', (req, res) => {
   const db = getDatabase();
+  
+  // Force no cache for dynamic content
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  
   res.json({ 
     statusCode: 200,
     message: 'Success',
@@ -370,6 +376,12 @@ app.get('/api/news', (req, res) => {
 // Images routes
 app.get('/api/images', (req, res) => {
   const db = getDatabase();
+  
+  // Force no cache for dynamic content
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  
   res.json({ 
     statusCode: 200,
     message: 'Success',
@@ -380,6 +392,12 @@ app.get('/api/images', (req, res) => {
 // Videos routes
 app.get('/api/videos', (req, res) => {
   const db = getDatabase();
+  
+  // Force no cache for dynamic content
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  
   res.json({ 
     statusCode: 200,
     message: 'Success',
@@ -390,6 +408,12 @@ app.get('/api/videos', (req, res) => {
 // Services routes
 app.get('/api/services', (req, res) => {
   const db = getDatabase();
+  
+  // Force no cache for dynamic content
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  
   res.json({ 
     statusCode: 200,
     message: 'Success',
@@ -1135,6 +1159,77 @@ app.get('/api/cors-status', (req, res) => {
         'Access-Control-Allow-Headers': res.get('Access-Control-Allow-Headers'),
         'Access-Control-Allow-Credentials': res.get('Access-Control-Allow-Credentials')
       },
+      timestamp: new Date().toISOString()
+    }
+  });
+});
+
+// Debug endpoint to check for localhost URLs in database
+app.get('/api/debug/urls', (req, res) => {
+  const db = getDatabase();
+  const localhostUrls = [];
+  
+  // Check news images
+  if (db.news) {
+    db.news.forEach(news => {
+      if (news.images && Array.isArray(news.images)) {
+        news.images.forEach(image => {
+          if (typeof image === 'string' && image.includes('localhost:3001')) {
+            localhostUrls.push({
+              type: 'news',
+              id: news.id,
+              field: 'images',
+              url: image
+            });
+          }
+        });
+      }
+    });
+  }
+  
+  // Check images collection
+  if (db.images) {
+    db.images.forEach(image => {
+      if (image.url && image.url.includes('localhost:3001')) {
+        localhostUrls.push({
+          type: 'images',
+          id: image.id,
+          field: 'url',
+          url: image.url
+        });
+      }
+    });
+  }
+  
+  // Check products
+  if (db.products) {
+    db.products.forEach(product => {
+      if (product.images && Array.isArray(product.images)) {
+        product.images.forEach(image => {
+          if (typeof image === 'string' && image.includes('localhost:3001')) {
+            localhostUrls.push({
+              type: 'products',
+              id: product.id,
+              field: 'images',
+              url: image
+            });
+          }
+        });
+      }
+    });
+  }
+  
+  // Set no-cache headers
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  
+  res.json({
+    statusCode: 200,
+    message: 'Database URL Debug',
+    data: {
+      localhostUrlsFound: localhostUrls.length,
+      localhostUrls: localhostUrls,
       timestamp: new Date().toISOString()
     }
   });
